@@ -1,0 +1,1 @@
+savedcmd_/home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/Module.symvers :=  scripts/mod/modpost -M  -a    -N  -o /home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/Module.symvers -n -T /home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/modules.order -i Module.symvers -e 

@@ -1,0 +1,1 @@
+savedcmd_/home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/modules.order := {   echo /home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/src/facer.o; :; } > /home/abhidahal/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/modules.order
