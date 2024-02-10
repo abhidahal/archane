@@ -1,3 +1,5 @@
+# Non-Config Program files
+
 Code
 Docker Desktop
 Insomnia
@@ -31,3 +33,29 @@ kiorc
 mimeapps.list
 trashrc
 
+
+# Dynamic Files
+Kvantum/kvantum.kvconfig
+dunst/Wall-Dcol.conf
+dunst/dunstrc
+dunst/icons/hyprdots.svg
+dunst/icons/vol/*
+gtk-3.0/settings.ini
+gtk-4.0
+hypr/theme.ctl
+hypr/themes/Wall-Dcol.conf
+hypr/themes/colors.conf
+hypr/themes/theme.conf
+hypr/wallbash/palette.svg
+kitty/themes/theme.conf
+nvim/lua/plugins/setTheme.lua
+qt5ct/qt5ct.conf
+rofi/themes/Wall-Dcol.rasi
+rofi/themes/theme.rasi
+swww/wall.blur
+swww/wall.rofi
+swww/wall.set
+waybar/config.ctl
+waybar/config.jsonc
+waybar/style.css
+waybar/themes/Wall-Dcol.css
