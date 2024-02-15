@@ -30,7 +30,7 @@
     height = 300
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = bottom-center
 
     # Offset from the origin
     offset = 20x20
@@ -393,8 +393,8 @@
 #    summary = "*script*"
 #    script = dunst_test.sh
 
-[script-test]
-   script = /home/abhidahal/.config/hypr/scripts/flashkeyboard.sh
+# [script-test]
+#    script = /home/abhidahal/.config/hypr/scripts/flashkeyboard.sh
 
 
 #[ignore]
