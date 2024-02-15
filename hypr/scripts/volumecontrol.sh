@@ -24,7 +24,7 @@ function notify_vol
 	vol=$(pamixer $srce --get-volume | cat)
 	angle="$(((($vol + 2) / 5) * 5))"
 	ico="${icodir}/vol-${angle}.svg"
-	bar=$(seq -s "." $(($vol / 15)) | sed 's/[0-9]//g')
+	bar=$(seq -s "." $(($vol / 11)) | sed 's/[0-9]//g')
 	dunstify "t2" -a "$vol$bar" "$nsink" -i $ico -r 91190 -t 800
 }
 

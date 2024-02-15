@@ -2,9 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- local discipline = require("abhidahal.discipline")
---
--- discipline.cowboy()
+local discipline = require("abhidahal.discipline")
+discipline.cowboy()
 
 local keymap = vim.keymap
 
@@ -13,7 +12,6 @@ keymap.set("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
-keymap.set("i", "<TAB>", "copilot#Accept")
 keymap.set("n", "<F2>", ":IncRename ", { desc = " File" })
 
 -- Move Lines
