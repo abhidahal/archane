@@ -33,7 +33,10 @@ kdeglobals
 kiorc
 mimeapps.list
 trashrc
-
+spotify
+kdeconnect
+menus
+QtProject.conf
 
 # Dynamic Files
 # Kvantum/kvantum.kvconfig

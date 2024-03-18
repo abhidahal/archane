@@ -6,6 +6,14 @@ return {
     cmd = "IncRename",
     config = true,
   },
+  -- Use <tab> for completion and snippets (supertab)
+  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
+  {
+    "L3MON4D3/LuaSnip",
+    keys = function()
+      return {}
+    end,
+  },
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
@@ -49,9 +57,14 @@ return {
       })
     end,
   },
-  -- {
-  --   "github/copilot.vim",
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      -- These are disabled in the default configuration.
+      suggestion = { enabled = true },
+      panel = { enabled = true },
+    },
+  },
   -- Go forward/backward with square brackets
   {
     "echasnovski/mini.bracketed",
@@ -82,6 +95,22 @@ return {
     dependencies = { "hrsh7th/cmp-emoji", "hrsh7th/cmp-cmdline" },
     opts = function(_, opts)
       table.insert(opts.sources, { name = "emoji" })
+    end,
+  },
+
+  {
+    "michaelrommel/nvim-silicon",
+    lazy = true,
+    cmd = "Silicon",
+    config = function()
+      require("silicon").setup({
+        -- Configuration here, or leave empty to use defaults
+        font = "CaskaydiaCove Nerd Font=34;twemoji=34",
+        to_clipboard = true,
+        output = function()
+          return "~/Pictures/CodeSS/" .. os.date("!%Y-%m-%dT%H-%M-%S") .. "_code.png"
+        end,
+      })
     end,
   },
 }

@@ -24,3 +24,4 @@ alias pc='$aurhelper -Sc'                                                       
 alias dolph='dolphin . &'                                                            # gui file manager
 alias rgb='~/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py' # needs linux predator-sense-linux-module
 alias help='tldr --list  | fzf --preview="tldr {1} --color=always" --preview-window=right,70% | xargs tldr '
+alias serve="browser-sync start --server --files ."

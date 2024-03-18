@@ -71,4 +71,17 @@ return {
       opts.section.header.val = vim.split(logo, "\n", { trimempty = true })
     end,
   },
+
+  --   "nvim-lualine/lualine.nvim",
+  --   opts = function()
+  --     return {
+  --       sections = {
+  --
+  --         lualine_c = {
+  --           "root",
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
 }

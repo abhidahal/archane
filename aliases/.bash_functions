@@ -72,8 +72,7 @@ function get() {
 	if [ "$#" -eq 2 ]; then
 		COMMAND="$1"
 		SEARCHWORD="$2"
-		(eval "$COMMAND" | grep "$SEARCHWORD") || echo -e "\e[31mNo matches found.\e[0m"
-		wl-copy
+		(eval "$COMMAND" | grep "$SEARCHWORD" | wl-copy) || echo -e "\e[31mNo matches found.\e[0m"
 		return
 	fi
 }
