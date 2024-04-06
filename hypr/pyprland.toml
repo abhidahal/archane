@@ -1,0 +1,46 @@
+[pyprland]
+plugins = [
+  "scratchpads",
+  "layout_center",
+  "magnify",
+  "expose",
+  "workspaces_follow_focus",
+  "shortcuts_menu",
+]
+
+[workspaces_follow_focus]
+max_workspaces = 9
+
+[expose]
+include_special = false
+
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm"
+class = "kitty-dropterm"
+size = "75% 60%"
+
+[scratchpads.htop]
+animation = "fromLeft"
+command = "kitty --class kitty-htop htop"
+class = "kitty-htop"
+lazy = true
+size = "50% 90%"
+
+
+[scratchpads.download]
+animation = "fromRight"
+command = "dolphin ~/Downloads"
+lazy = false
+size = "40% 90%"
+unfocus = "hide"
+
+[shortcuts_menu.entries."My submenu"]
+"Hyprland config" = 'kitty  nvim ~/.config/hypr/keybindings.conf'
+"entry X" = "command"
+
+[shortcuts_menu.entries]
+
+"Hyprland config" = 'kitty  nvim ~/.config/hypr/keybindings.conf'
+"Nvim config" = 'kitty nvim ~/.config/nvim/lua/config/keymaps.lua'
+
