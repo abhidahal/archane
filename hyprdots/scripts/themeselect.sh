@@ -26,7 +26,7 @@ done | rofi -dmenu -theme-str "${r_override}" -config $RofiConf -select "${gtkTh
 ThemeNvimFile="$HOME/.config/nvim/lua/plugins/setTheme.lua"
 if [ ! -z $ThemeSel ]; then
 	"${ScrDir}/themeswitch.sh" -s $ThemeSel
-	dunstify "t1" -a " ${ThemeSel}" -i "~/.config/dunst/icons/hyprdots.png" -r 91190 -t 2200
+	notify-send -a "t1" -i "~/.config/dunst/icons/hyprdots.png" " ${ThemeSel}"
 
 	case $ThemeSel in
 
@@ -63,7 +63,7 @@ if [ ! -z $ThemeSel ]; then
 		;;
 
 	"Frosted-Glass")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-latte"/' $ThemeNvimFile
+		sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin"/' $ThemeNvimFile
 		;;
 
 	"Gruvbox-Retro")

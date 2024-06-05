@@ -38,6 +38,9 @@ kdeconnect
 menus
 QtProject.conf
 gh
+libvirt
+remmina
+yarn
 
 # Dynamic Files
 # Kvantum/kvantum.kvconfig

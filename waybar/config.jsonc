@@ -6,7 +6,7 @@
     "layer": "top",
     "position": "bottom",
     "mod": "dock",
-    "height": 32,
+    "height": 37,
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
@@ -14,9 +14,9 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","custom/l_end","cpu","memory","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","hyprland/window","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/updates","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","","custom/cliphist","custom/power","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","hyprland/window","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","","custom/power","custom/r_end","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -24,30 +24,83 @@
     "cpu": {
         "interval": 10,
         "format": "󰍛 {usage}%",
+        "rotate": 0,
         "format-alt": "{icon0}{icon1}{icon2}{icon3}",
         "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
     },
 
     "memory": {
+        "states": {
+            "c": 90, // critical
+            "h": 60, // high
+            "m": 30, // medium
+        },
         "interval": 30,
-        "format": "󰾆 {percentage}%",
-        "format-alt": "󰾅 {used}GB",
+        "format": "󰾆 {used}GB",
+        "rotate": 0,
+        "format-m": "󰾅 {used}GB",
+        "format-h": "󰓅 {used}GB",
+        "format-c": " {used}GB",
+        "format-alt": "󰾆 {percentage}%",
         "max-length": 10,
         "tooltip": true,
-        "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
+        "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
     },
 
-    "custom/gpuinfo": {
-        "exec": " ~/.config/hypr/scripts/gpuinfo.sh",
+    "custom/cpuinfo": {
+        "exec": " /home/abhidahal/.config/hyprdots/scripts/cpuinfo.sh",
         "return-type": "json",
-        "format": " {}",
+        "format": "{}",
+        "rotate": 0,
         "interval": 5, // once every 5 seconds
         "tooltip": true,
         "max-length": 1000
     },
 
+    "custom/gpuinfo": {
+        "exec": " /home/abhidahal/.config/hyprdots/scripts/gpuinfo.sh",
+        "return-type": "json",
+        "format": "{}",
+        "rotate": 0,
+        "interval": 5, // once every 5 seconds
+        "tooltip": true,
+        "max-length": 1000,
+        "on-click": "/home/abhidahal/.config/hyprdots/scripts/gpuinfo.sh --toggle",
+    },
+
+    "custom/gpuinfo#nvidia": {
+        "exec": " /home/abhidahal/.config/hyprdots/scripts/gpuinfo.sh --use nvidia ",
+        "return-type": "json",
+        "format": "{}",
+        "rotate": 0,
+        "interval": 5, // once every 5 seconds
+        "tooltip": true,
+        "max-length": 1000,
+    },
+
+    "custom/gpuinfo#amd": {
+        "exec": " /home/abhidahal/.config/hyprdots/scripts/gpuinfo.sh --use amd ",
+        "return-type": "json",
+        "format": "{}",
+        "rotate": 0,
+        "interval": 5, // once every 5 seconds
+        "tooltip": true,
+        "max-length": 1000,
+    },
+
+    "custom/gpuinfo#intel": {
+        "exec": " /home/abhidahal/.config/hyprdots/scripts/gpuinfo.sh --use intel ",
+        "return-type": "json",
+        "format": "{}",
+        "rotate": 0,
+        "interval": 5, // once every 5 seconds
+        "tooltip": true,
+        "max-length": 1000,
+    },
+
     "idle_inhibitor": {
         "format": "{icon}",
+        "rotate": 0,
         "format-icons": {
             "activated": "󰥔",
             "deactivated": ""
@@ -56,6 +109,7 @@
 
     "clock": {
         "format": "{:%I:%M %p}",
+        "rotate": 0,
         "format-alt": "{:%R 󰃭 %d·%m·%y}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -80,6 +134,7 @@
 
     "hyprland/workspaces": {
         "disable-scroll": true,
+        "rotate": 0,
         "all-outputs": true,
         "active-only": false,
         "on-click": "activate",
@@ -89,9 +144,10 @@
 
     "hyprland/window": {
         "format": "  {}",
+        "rotate": 0,
         "separate-outputs": true,
         "rewrite": {
-            "abhidahal@ArchLinux:(.*)": "$1 ",
+            "abhidahal@arch:(.*)": "$1 ",
             "(.*) — Mozilla Firefox": "$1 󰈹",
             "(.*)Mozilla Firefox": "Firefox 󰈹",
             "(.*) - Visual Studio Code": "$1 󰨞",
@@ -105,6 +161,7 @@
 
     "backlight": {
         "device": "intel_backlight",
+        "rotate": 0,
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
         "on-scroll-up": "brightnessctl set 1%+",
@@ -113,32 +170,41 @@
     },
 
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "󰤨 {essid}",
-        "format-ethernet": "󱘖 Wired",
-        "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-linked": "󱘖 {ifname} (No IP)",
-        "format-disconnected": " Disconnected",
-        "format-alt": "󰤨 {signalStrength}%",
-        "interval": 5
+        "tooltip": true,
+        "format-wifi": " ",
+        "rotate": 0,
+        "format-ethernet": "󰈀 ",
+        "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+        "interval": 2,
     },
 
     "bluetooth": {
         "format": "",
-        "format-disabled": "", // an empty format will hide the module
+        "rotate": 0,
+        "format-disabled": "",
         "format-connected": " {num_connections}",
-        "tooltip-format": " {device_alias}",
-        "tooltip-format-connected": "{device_enumerate}",
-        "tooltip-format-enumerate-connected": " {device_alias}"
+        "format-connected-battery": "{icon} {num_connections}",
+        // "format-connected-battery": "{icon} {device_alias}-{device_battery_percentage}%",
+        "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device If this config option is not defined or none of the devices in the list are connected, it will fall back to showing the last connected device.
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{icon} {device_battery_percentage}%"
     },
 
     "pulseaudio": {
         "format": "{icon} {volume}",
+        "rotate": 0,
         "format-muted": "婢",
         "on-click": "pavucontrol -t 3",
-        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
-        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
-        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d",
+        "on-click-middle": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -o m",
+        "on-scroll-up": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -o i",
+        "on-scroll-down": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -o d",
         "tooltip-format": "{icon} {desc} // {volume}%",
         "scroll-step": 5,
         "format-icons": {
@@ -154,27 +220,36 @@
 
     "pulseaudio#microphone": {
         "format": "{format_source}",
+        "rotate": 0,
         "format-source": "",
         "format-source-muted": "",
         "on-click": "pavucontrol -t 4",
-        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -i m",
-        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -i i",
-        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -i d",
+        "on-click-middle": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -i m",
+        "on-scroll-up": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -i i",
+        "on-scroll-down": "/home/abhidahal/.config/hyprdots/scripts/volumecontrol.sh -i d",
         "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
         "scroll-step": 5
     },
 
     "custom/updates": {
-        "exec": "~/.config/hypr/scripts/systemupdate.sh",
+        "exec": "/home/abhidahal/.config/hyprdots/scripts/systemupdate.sh",
         "return-type": "json",
         "format": "󰮯 {}",
-        "on-click": "~/.config/hypr/scripts/systemupdate.sh up",
+        "rotate": 0,
+        "on-click": "/home/abhidahal/.config/hyprdots/scripts/systemupdate.sh up",
         "interval": 86400, // once every day
         "tooltip": true,
     },
 
+    "custom/keybindhint": {
+        "format": " ",
+        "rotate": 0,
+        "on-click": "/home/abhidahal/.config/hyprdots/scripts/keybinds_hint.sh"
+    },
+
     "tray": {
-        "icon-size": 19,
+        "icon-size": 22,
+        "rotate": 0,
         "spacing": 5
     },
 
@@ -185,26 +260,19 @@
             "critical": 20
         },
         "format": "{icon} {capacity}%",
+        "rotate": 0,
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
-    "custom/cliphist": {
-        "format": "{}",
-        "exec": "echo ; echo 󰅇 clipboard history",
-        "on-click": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh c",
-        "on-click-right": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh d",
-        "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh w",
-        "interval" : 86400, // once every day
-        "tooltip": true
-    },
-
     "custom/power": {
         "format": "{}",
+        "rotate": 0,
         "exec": "echo ; echo  logout",
-        "on-click": "~/.config/hypr/scripts/logoutlaunch.sh 2",
+        "on-click": "/home/abhidahal/.config/hyprdots/scripts/logoutlaunch.sh 2",
+        "on-click-right": "/home/abhidahal/.config/hyprdots/scripts/logoutlaunch.sh 1",
         "interval" : 86400, // once every day
         "tooltip": true
     },

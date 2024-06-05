@@ -1,11 +1,11 @@
 MenuBar=Disabled
 
 [$Version]
-update_info=dolphin_detailsmodesettings.upd:rename-leading-padding,dolphin_detailsmodesettings.upd:move-content-display
+update_info=dolphin_detailsmodesettings.upd:rename-leading-padding
 
 [ExtractDialog]
 2560x1440 screen: Window-Maximized=true
-DirHistory[$e]=$HOME/Downloads/UncutSans/,$HOME/Downloads/
+DirHistory[$e]=$HOME/Downloads/
 
 [General]
 ShowSelectionToggle=false
@@ -14,6 +14,7 @@ Version=202
 ViewPropsTimestamp=2023,4,26,16,58,48.324
 
 [IconsMode]
+IconSize=80
 MaximumTextLines=1
 PreviewSize=112
 
@@ -23,13 +24,9 @@ dateFormat=ShortFormat
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=16
-Recent Files[$e]=file:$HOME
-Recent URLs[$e]=file:$HOME/Downloads/,file:$HOME/Downloads/UncutSans/
-detailViewIconSize=16
 
 [KPropertiesDialog]
 2560x1080 screen: Window-Maximized=true
-2560x1440 screen: Window-Maximized=true
 
 [MainWindow]
 MenuBar=Disabled

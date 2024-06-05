@@ -7,6 +7,7 @@ ScrDir=`dirname "$(realpath "$0")"`
 source $ScrDir/globalcontrol.sh
 waybar_dir="${XDG_CONFIG_HOME:-$HOME/.config}/waybar"
 modules_dir="$waybar_dir/modules"
+conf_ctl="$waybar_dir/config.ctl"
 in_file="$waybar_dir/modules/style.css"
 out_file="$waybar_dir/style.css"
 src_file="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/themes/theme.conf"
@@ -22,7 +23,7 @@ fi
 
 # calculate height from control file or monitor res
 
-b_height=`grep '^1|' $waybar_dir/config.ctl | cut -d '|' -f 2`
+b_height=`grep '^1|' $conf_ctl | cut -d '|' -f 2`
 
 if [ -z $b_height ] || [ "$b_height" == "0" ]; then
     y_monres=`cat /sys/class/drm/*/modes | head -1 | cut -d 'x' -f 2`
@@ -43,7 +44,7 @@ export w_radius=$(( b_height*30/100 ))   # workspace rad 30% of height
 export w_margin=$(( b_height*10/100 ))   # workspace margin 10% of height
 export w_paddin=$(( b_height*10/100 ))   # workspace padding 10% of height
 export w_padact=$(( b_height*40/100 ))   # workspace active padding 40% of height
-export s_fontpx=$(( b_height*38/100 ))   # font size 38% of height
+export s_fontpx=$(( b_height*34/100 ))   # font size 34% of height
 
 if [ $b_height -lt 30 ] ; then
     export e_paddin=0
@@ -51,6 +52,63 @@ fi
 if [ $s_fontpx -lt 10 ] ; then
     export s_fontpx=10
 fi
+
+
+# adjust values for vert/horz
+
+export w_position=`grep '^1|' $conf_ctl | cut -d '|' -f 3`
+case ${w_position} in
+    top|bottom)
+        export x1g_margin=${g_margin}
+        export x2g_margin=0
+        export x3g_margin=${g_margin}
+        export x4g_margin=0
+        export x1rb_radius=0
+        export x2rb_radius=${b_radius}
+        export x3rb_radius=${b_radius}
+        export x4rb_radius=0
+        export x1lb_radius=${b_radius}
+        export x2lb_radius=0
+        export x3lb_radius=0
+        export x4lb_radius=${b_radius}
+        export x1rc_radius=0
+        export x2rc_radius=${c_radius}
+        export x3rc_radius=${c_radius}
+        export x4rc_radius=0
+        export x1lc_radius=${c_radius}
+        export x2lc_radius=0
+        export x3lc_radius=0
+        export x4lc_radius=${c_radius}
+        export x1="top"
+        export x2="bottom"
+        export x3="left" 
+        export x4="right" ;;
+    left|right)
+        export x1g_margin=0
+        export x2g_margin=${g_margin}
+        export x3g_margin=0
+        export x4g_margin=${g_margin}
+        export x1rb_radius=0
+        export x2rb_radius=0
+        export x3rb_radius=${b_radius}
+        export x4rb_radius=${b_radius}
+        export x1lb_radius=${b_radius}
+        export x2lb_radius=${b_radius}
+        export x3lb_radius=0
+        export x4lb_radius=0
+        export x1rc_radius=0
+        export x2rc_radius=${c_radius}
+        export x3rc_radius=${c_radius}
+        export x4rc_radius=0
+        export x1lc_radius=${c_radius}
+        export x2lc_radius=0
+        export x3lc_radius=0
+        export x4lc_radius=${c_radius}
+        export x1="left"
+        export x2="right"
+        export x3="top" 
+        export x4="bottom" ;;
+esac
 
 
 # list modules and generate theme style

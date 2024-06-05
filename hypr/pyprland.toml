@@ -5,7 +5,6 @@ plugins = [
   "magnify",
   "expose",
   "workspaces_follow_focus",
-  "shortcuts_menu",
 ]
 
 [workspaces_follow_focus]
@@ -18,7 +17,20 @@ include_special = false
 animation = "fromTop"
 command = "kitty --class kitty-dropterm"
 class = "kitty-dropterm"
-size = "75% 60%"
+size = "75% 40%"
+
+[scratchpads.term2]
+animation = "fromBottom"
+command = "kitty --class kitty-dropterm"
+class = "kitty-dropterm"
+size = "75% 50%"
+
+
+[scratchpads.mainterm]
+animation = "fromBottom"
+command = "kitty --class kitty-dropterm"
+class = "kitty-dropterm"
+size = "96% 93%"
 
 [scratchpads.htop]
 animation = "fromLeft"
@@ -28,19 +40,10 @@ lazy = true
 size = "50% 90%"
 
 
-[scratchpads.download]
+[scratchpads.dolphin]
 animation = "fromRight"
 command = "dolphin ~/Downloads"
+class = "Dolphin Float"
 lazy = false
 size = "40% 90%"
-unfocus = "hide"
-
-[shortcuts_menu.entries."My submenu"]
-"Hyprland config" = 'kitty  nvim ~/.config/hypr/keybindings.conf'
-"entry X" = "command"
-
-[shortcuts_menu.entries]
-
-"Hyprland config" = 'kitty  nvim ~/.config/hypr/keybindings.conf'
-"Nvim config" = 'kitty nvim ~/.config/nvim/lua/config/keymaps.lua'
-
+# unfocus = "hide"

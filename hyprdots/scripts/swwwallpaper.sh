@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 
+
+# lock instance
+
+lockFile="/tmp/hyrpdots$(id -u)swwwallpaper.lock"
+[ -e "$lockFile" ] && echo "An instance of the script is already running..." && exit 1
+touch "${lockFile}"
+trap 'rm -f ${lockFile}' EXIT
+
+
 # define functions
 
 Wall_Update()
@@ -14,22 +23,24 @@ Wall_Update()
     $ScrDir/swwwallbash.sh "$x_wall" &
 
     if [ ! -f "${cacheDir}/${curTheme}/${cacheImg}" ] ; then
-        convert -strip "$x_wall" -thumbnail 500x500^ -gravity center -extent 500x500 "${cacheDir}/${curTheme}/${cacheImg}" &
+        convert -strip "${x_wall}"[0] -thumbnail 500x500^ -gravity center -extent 500x500 "${cacheDir}/${curTheme}/${cacheImg}" &
     fi
 
     if [ ! -f "${cacheDir}/${curTheme}/${cacheImg}.rofi" ] ; then
-        convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 "$x_wall" "${cacheDir}/${curTheme}/${cacheImg}.rofi" &
+        convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 "$x_wall"[0] "${cacheDir}/${curTheme}/${cacheImg}.rofi" &
     fi
 
     if [ ! -f "${cacheDir}/${curTheme}/${cacheImg}.blur" ] ; then
-        convert -strip -scale 10% -blur 0x3 -resize 100% "$x_wall" "${cacheDir}/${curTheme}/${cacheImg}.blur" &
+        convert -strip -scale 10% -blur 0x3 -resize 100% "$x_wall"[0] "${cacheDir}/${curTheme}/${cacheImg}.blur" &
     fi
 
     wait
     awk -F '|' -v thm="${curTheme}" -v wal="${x_update}" '{OFS=FS} {if($2==thm)$NF=wal;print$0}' "${ThemeCtl}" > "${ScrDir}/tmp" && mv "${ScrDir}/tmp" "${ThemeCtl}"
     ln -fs "${x_wall}" "${wallSet}"
-    ln -fs "${cacheDir}/${curTheme}/${cacheImg}.rofi" "${wallRfi}"
+    ln -fs "${cacheDir}/${curTheme}/${cacheImg}" "${wallTmb}"
     ln -fs "${cacheDir}/${curTheme}/${cacheImg}.blur" "${wallBlr}"
+    ln -fs "${cacheDir}/${curTheme}/${cacheImg}.dcol" "${wallDcl}"
+    ln -fs "${cacheDir}/${curTheme}/${cacheImg}.rofi" "${wallRfi}"
 }
 
 Wall_Change()
@@ -58,13 +69,15 @@ Wall_Set()
         xtrans="grow"
     fi
 
-    swww img "$wallSet" \
+    #? getting the real path as symlinks too glitch
+    swww img "$(readlink "${wallSet}")" \
     --transition-bezier .43,1.19,1,.4 \
     --transition-type "$xtrans" \
     --transition-duration 0.7 \
     --transition-fps 60 \
     --invert-y \
-    --transition-pos "$( hyprctl cursorpos )"
+    --transition-pos "$( hyprctl cursorpos )"    
+
 }
 
 
@@ -75,6 +88,8 @@ source $ScrDir/globalcontrol.sh
 wallSet="${XDG_CONFIG_HOME:-$HOME/.config}/swww/wall.set"
 wallBlr="${XDG_CONFIG_HOME:-$HOME/.config}/swww/wall.blur"
 wallRfi="${XDG_CONFIG_HOME:-$HOME/.config}/swww/wall.rofi"
+wallTmb="${XDG_CONFIG_HOME:-$HOME/.config}/swww/wall.thmb"
+wallDcl="${XDG_CONFIG_HOME:-$HOME/.config}/swww/wall.dcol"
 ctlLine=$(grep '^1|' ${ThemeCtl})
 
 if [ `echo $ctlLine | wc -l` -ne "1" ] ; then
@@ -86,12 +101,12 @@ curTheme=$(echo "$ctlLine" | awk -F '|' '{print $2}')
 fullPath=$(echo "$ctlLine" | awk -F '|' '{print $NF}' | sed "s+~+$HOME+")
 wallName=$(basename "$fullPath")
 wallPath=$(dirname "$fullPath")
-mapfile -d '' Wallist < <(find ${wallPath} -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
+mapfile -d '' Wallist < <(find ${wallPath} -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
 
 if [ ! -f "$fullPath" ] ; then
     if [ -d "${XDG_CONFIG_HOME:-$HOME/.config}/swww/$curTheme" ] ; then
         wallPath="${XDG_CONFIG_HOME:-$HOME/.config}/swww/$curTheme"
-        mapfile -d '' Wallist < <(find ${wallPath} -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
+        mapfile -d '' Wallist < <(find ${wallPath} -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z)
         fullPath="${Wallist[0]}"
     else
         echo "ERROR: wallpaper $fullPath not found..."
@@ -102,7 +117,7 @@ fi
 
 # evaluate options
 
-while getopts "nps" option ; do
+while getopts "nps:" option ; do
     case $option in
     n ) # set next wallpaper
         xtrans="grow"
@@ -111,9 +126,8 @@ while getopts "nps" option ; do
         xtrans="outer"
         Wall_Change p ;;
     s ) # set input wallpaper
-        shift $((OPTIND -1))
-        if [ -f "$1" ] ; then
-            Wall_Update "$1"
+        if [ -f "$OPTARG" ] ; then
+            Wall_Update "$OPTARG"
         fi ;;
     * ) # invalid option
         echo "n : set next wall"
@@ -128,7 +142,7 @@ done
 
 swww query
 if [ $? -eq 1 ] ; then
-    swww init
+    swww-daemon --format xrgb &
 fi
 
 Wall_Set

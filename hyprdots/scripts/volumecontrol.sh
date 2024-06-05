@@ -5,79 +5,89 @@ source $ScrDir/globalcontrol.sh
 
 # define functions
 
-function print_error
-{
+print_error() {
 	cat <<"EOF"
-    ./volumecontrol.sh -[device] <action>
+    ./volumecontrol.sh -[device] <actions>
     ...valid device are...
-        i -- [i]nput decive
-        o -- [o]utput device
+        i   -- input decive
+        o   -- output device
+        p   -- player application
     ...valid actions are...
-        i -- <i>ncrease volume [+5]
-        d -- <d>ecrease volume [-5]
-        m -- <m>ute [x]
+        i   -- increase volume [+5]
+        d   -- decrease volume [-5]
+        m   -- mute [x]
 EOF
+	exit 1
 }
 
-function notify_vol
-{
-	vol=$(pamixer $srce --get-volume | cat)
+notify_vol() {
 	angle="$(((($vol + 2) / 5) * 5))"
 	ico="${icodir}/vol-${angle}.svg"
-	bar=$(seq -s "." $(($vol / 11)) | sed 's/[0-9]//g')
-	dunstify "t2" -a "$vol$bar" "$nsink" -i $ico -r 91190 -t 800
+	bar=$(seq -s "." $(($vol / 15)) | sed 's/[0-9]//g')
+	notify-send -a "t2" -r 91190 -t 800 -i "${ico}" "${vol}${bar}" "${nsink}"
 }
 
-function notify_mute
-{
-	mute=$(pamixer $srce --get-mute | cat)
-	if [ "$mute" == "true" ]; then
-		dunstify "t2" -a "muted" "$nsink" -i ${icodir}/muted-${dvce}.svg -r 91190 -t 800
+notify_mute() {
+	mute=$(pamixer "${srce}" --get-mute | cat)
+	[ "${srce}" == "--default-source" ] && dvce="mic" || dvce="speaker"
+	if [ "${mute}" == "true" ]; then
+		notify-send -a "t2" -r 91190 -t 800 -i "${icodir}/muted-${dvce}.svg" "muted" "${nsink}"
 	else
-		dunstify "t2" -a "unmuted" "$nsink" -i ${icodir}/unmuted-${dvce}.svg -r 91190 -t 800
+		notify-send -a "t2" -r 91190 -t 800 -i "${icodir}/unmuted-${dvce}.svg" "unmuted" "${nsink}"
 	fi
 }
 
-# set device source
+action_pamixer() {
+	pamixer "${srce}" -"${1}" "${step}" --allow-boost --set-limit 200
+	vol=$(pamixer "${srce}" --get-volume | cat)
+}
 
-while getopts io SetSrc; do
-	case $SetSrc in
+action_playerctl() {
+	[ "${1}" == "i" ] && pvl="+" || pvl="-"
+	playerctl --player="${srce}" volume 0.0"${step}""${pvl}"
+	vol=$(playerctl --player="${srce}" volume | awk '{ printf "%.0f\n", $0 * 100 }')
+}
+
+# eval device option
+
+while getopts iop: DeviceOpt; do
+	case "${DeviceOpt}" in
 	i)
-		nsink=$(pamixer --list-sources | grep "_input." | head -1 | awk -F '" "' '{print $NF}' | sed 's/"//')
+		nsink=$(pamixer --list-sources | awk -F '"' 'END {print $(NF - 1)}')
+		[ -z "${nsink}" ] && echo "ERROR: Input device not found..." && exit 0
+		ctrl="pamixer"
 		srce="--default-source"
-		dvce="mic"
 		;;
 	o)
-		nsink=$(pamixer --get-default-sink | grep "_output." | awk -F '" "' '{print $NF}' | sed 's/"//')
+		nsink=$(pamixer --get-default-sink | awk -F '"' 'END{print $(NF - 1)}')
+		[ -z "${nsink}" ] && echo "ERROR: Output device not found..." && exit 0
+		ctrl="pamixer"
 		srce=""
-		dvce="speaker"
 		;;
+	p)
+		nsink=$(playerctl --list-all | grep -w "${OPTARG}")
+		[ -z "${nsink}" ] && echo "ERROR: Player ${OPTARG} not active..." && exit 0
+		ctrl="playerctl"
+		srce="${nsink}"
+		;;
+	*) print_error ;;
 	esac
 done
 
-if [ $OPTIND -eq 1 ]; then
-	print_error
-fi
+# set default variables
 
-# set device action
-
+icodir="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/icons/vol"
 shift $((OPTIND - 1))
 step="${2:-5}"
-icodir="~/.config/dunst/icons/vol"
 
-case $1 in
-i)
-	pamixer $srce -i ${step} --allow-boost --set-limit 200
-	notify_vol
-	;;
-d)
-	pamixer $srce -d ${step} --allow-boost --set-limit 200
+# execute action
 
-	notify_vol
-	;;
-m)
-	pamixer $srce -t
-	notify_mute
-	;;
+case "${1}" in
+i) action_${ctrl} i ;;
+d) action_${ctrl} d ;;
+m) "${ctrl}" "${srce}" -t && notify_mute && exit 0 ;;
 *) print_error ;;
 esac
+
+notify_vol
+

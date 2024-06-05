@@ -38,6 +38,16 @@ function ghp() {
 	cat ~/.config/aliases/.gitCommands | grep $KEYWORD
 }
 
+function search() {
+	KEYWORD="$*"
+	if [ $# -lt 1 ]; then
+		echo -e "\e[31mcommand cannot be empty\n\e[0msearch <keyword>"
+		return
+	fi
+	echo $KEYWORD
+	firefox --new-tab "https://www.google.com/search?client=firefox-b-d&q=${KEYWORD// /+}" &
+
+}
 function gcnpr() {
 	TICKET="$1"
 	MESSAGE="$2"
@@ -72,7 +82,7 @@ function get() {
 	if [ "$#" -eq 2 ]; then
 		COMMAND="$1"
 		SEARCHWORD="$2"
-		(eval "$COMMAND" | grep "$SEARCHWORD" | wl-copy) || echo -e "\e[31mNo matches found.\e[0m"
+		(eval "$COMMAND" | grep "$SEARCHWORD" | fzf --prompt="Grep Word " --pointer="⇏" | wl-copy) || echo -e "\e[31mNo matches found.\e[0m"
 		return
 	fi
 }
@@ -94,6 +104,28 @@ function fzfHelp() {
 		return
 	fi
 	cat "${DIR}" | fzf --prompt="Grep Word " --pointer="⇏" | wl-copy
+}
+
+function lss() {
+	WORD="$*"
+	if [ $# -lt 1 ]; then
+		echo -e "\e[31mdirectory field can't be empty\n\e[0mlss <word>"
+		return
+	fi
+	hg ${WORD} | fzf --prompt="Directory " --pointer="⇏"
+}
+
+function ipaddr() {
+	if [ $# -lt 1 ]; then
+		echo "Device IPv4 IP:"
+		ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | sed -n 2p
+		echo "\e\nDevice IPv6 IP:"
+		ip -6 addr | grep -oP '(?<=inet6\s)[\da-f:]+' | sed -n 2p
+		echo "\e\nNetwork Public IP:"
+		curl -s 'http://checkip.dyndns.org' | sed 's/.*Current IP Address: \([0-9\.]*\).*/\1/g'
+		return
+	fi
+	echo -e "\e[31minvalid paramaters\n\e[0mno paramaters required"
 }
 
 alias kittykeys="fzfHelp $KittyConfig"
