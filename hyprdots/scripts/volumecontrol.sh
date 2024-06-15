@@ -90,4 +90,3 @@ m) "${ctrl}" "${srce}" -t && notify_mute && exit 0 ;;
 esac
 
 notify_vol
-

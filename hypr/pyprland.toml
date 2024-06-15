@@ -18,19 +18,22 @@ animation = "fromTop"
 command = "kitty --class kitty-dropterm"
 class = "kitty-dropterm"
 size = "75% 40%"
+lazy =true
 
 [scratchpads.term2]
 animation = "fromBottom"
 command = "kitty --class kitty-dropterm"
 class = "kitty-dropterm"
 size = "75% 50%"
+lazy =true
 
 
 [scratchpads.mainterm]
 animation = "fromBottom"
-command = "kitty --class kitty-dropterm"
-class = "kitty-dropterm"
+command = "kitty --class kitty-dropterm-main"
+class = "kitty-dropterm-main"
 size = "96% 93%"
+lazy =false
 
 [scratchpads.htop]
 animation = "fromLeft"
@@ -38,12 +41,11 @@ command = "kitty --class kitty-htop htop"
 class = "kitty-htop"
 lazy = true
 size = "50% 90%"
-
+unfocus = "hide"
 
 [scratchpads.dolphin]
 animation = "fromRight"
 command = "dolphin ~/Downloads"
-class = "Dolphin Float"
-lazy = false
+class = "dolphin-float"
+lazy = true
 size = "40% 90%"
-# unfocus = "hide"

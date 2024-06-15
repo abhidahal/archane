@@ -4,16 +4,20 @@ alias c='clear'
 alias reload='exec $SHELL'
 alias ":q"="exit"
 alias v='nvim'
+alias vv='nvim'
 alias ll='ls -l --color=auto --group-directories-first'
 alias la='ls -al --color=auto --group-directories-first'
-alias vv='nvim .'
 alias exp='explorer.exe .'
 alias cat='bat'
+
+alias explain='gh copilot explain'
+alias suggest='gh copilot suggest'
 
 alias l='eza -l  --icons --hyperlink'
 alias ls='eza -1  --icons --hyperlink'
 alias ll='eza -la --icons --hyperlink'
 alias ld='eza -lD --icons --hyperlink'
+alias tree='eza -T --icons --hyperlink'
 alias hg="kitty +kitten hyperlinked_grep"
 alias img="kitty +kitten icat"
 alias in='sudo pacman -S'                                                                                  # install package

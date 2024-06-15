@@ -17,7 +17,7 @@ keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
 
 -- Rename
---
+
 keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename File" })
 
 -- Move Lines
@@ -32,9 +32,12 @@ keymap.set("v", "<A-up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 keymap.set("v", "<leader>cp", ":Silicon<return>", { desc = "Screenshot" })
 keymap.set("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
 
--- InsertMode Shift Backspace
+-- InsertMode Ctrl Backspace
 keymap.set("i", "<C-bs>", "<ESC>ciw", { desc = "Delete" })
 
--- keymap.set("v", "<leader>p", function()
---   require("telescope").extensions.yank_history.yank_history({})
--- end, { desc = "Open Yank History" })
+-- Paste without overwriting register
+-- keymap.set("v", "p", '"_dP')
+
+-- Keep window centered when going up/down
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")

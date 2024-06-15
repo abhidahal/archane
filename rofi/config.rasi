@@ -1,6 +1,6 @@
 // Config //
 configuration {
-    modi:                        "drun,filebrowser,window,run";
+    modi:                        "drun,filebrowser,window";
     show-icons:                  true;
     display-drun:                "";
     display-run:                 "";
@@ -17,8 +17,8 @@ configuration {
 
 // Main //
 window {
-    height:                      35em;
-    width:                       56em;
+    height:                      12em;
+    width:                       38em;
     transparency:                "real";
     fullscreen:                  false;
     enabled:                     true;
@@ -33,28 +33,8 @@ mainbox {
     spacing:                     0em;
     padding:                     0em;
     orientation:                 vertical;
-    children:                    [ "inputbar" , "listbox" ];
+    children:                    [ "listbox" , "inputmode" ];
     background-color:            transparent;
-    background-image:            url("~/.config/swww/wall.blur", height);
-}
-
-
-// Inputs //
-inputbar {
-    enabled:                     true;
-    spacing:                     0em;
-    padding:                     5em;
-    children:                    [ "entry" ];
-    background-color:            transparent;
-    background-image:            url("~/.config/swww/wall.rofi", width);
-}
-entry {
-    border-radius:               2em;
-    enabled:                     true;
-    spacing:                     1em;
-    padding:                     1em;
-    text-color:                  @main-fg;
-    background-color:            @main-bg;
 }
 
 
@@ -63,42 +43,70 @@ listbox {
     padding:                     0em;
     spacing:                     0em;
     orientation:                 horizontal;
-    children:                    [ "listview" , "mode-switcher" ];
-    background-color:            @main-bg;
+    children:                    [ "listview" ];
+    background-color:            transparent;
+    background-image:            url("~/.config/swww/wall.blur", width);
 }
 listview {
-    padding:                     1.5em;
-    spacing:                     0.5em;
+    padding:                     0.5em;
+    spacing:                     0.2em;
     enabled:                     true;
-    columns:                     2;
-    lines:                       3;
+    columns:                     5;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
-    layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
     cursor:                      "default";
-    background-color:            transparent;
+    background-color:            @main-bg;
     text-color:                  @main-fg;
+}
+
+
+// Inputs //
+inputmode {
+    padding:                     0em;
+    spacing:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "inputbar" , "mode-switcher" ];
+    background-color:            transparent;
+}
+inputbar {
+    enabled:                     true;
+    width:                       24em;
+    padding:                     0em;
+    spacing:                     0em;
+    padding:                     1.5em 1em 1.5em 2.5em;
+    children:                    [ "entry" ];
+    background-color:            transparent;
+}
+entry {
+    vertical-align:              0.5;
+    border-radius:               3em;
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     1em;
+    text-color:                  @main-fg;
+    background-color:            @main-bg;
 }
 
 
 // Modes //
 mode-switcher {
-    orientation:                 vertical;
-    width:                       6.6em;
+    width:                       13em;
+    orientation:                 horizontal;
     enabled:                     true;
-    padding:                     1.5em;
-    spacing:                     1.5em;
+    padding:                     1.5em 2.5em 1.5em 0em;
+    spacing:                     1em;
     background-color:            transparent;
 }
 button {
     cursor:                      pointer;
     vertical-align:              0.50;
     horizontal-align:            0.45;
-    border-radius:               2em;
+    padding:                     0em;
+    border-radius:               3em;
     background-color:            @main-bg;
     text-color:                  @main-fg;
 }
@@ -110,8 +118,9 @@ button selected {
 
 // Elements //
 element {
+    orientation:                 vertical;
     enabled:                     true;
-    spacing:                     0em;
+    spacing:                     0.2em;
     padding:                     0.5em;
     cursor:                      pointer;
     background-color:            transparent;
@@ -127,14 +136,14 @@ element selected.normal {
     text-color:                  @select-fg;
 }
 element-icon {
-    size:                        3em;
+    size:                        2.5em;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
 }
 element-text {
     vertical-align:              0.5;
-    horizontal-align:            0.0;
+    horizontal-align:            0.5;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
