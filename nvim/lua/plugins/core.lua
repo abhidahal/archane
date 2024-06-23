@@ -4,7 +4,12 @@ return {
   { "fladson/vim-kitty" },
   { "wakatime/vim-wakatime" },
   { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-  { "mg979/vim-visual-multi" },
+  {
+    "mg979/vim-visual-multi",
+    config = function()
+      vim.g.VM_default_mappings = 0
+    end,
+  },
   { "debugloop/telescope-undo.nvim" },
   {
     "mbbill/undotree",

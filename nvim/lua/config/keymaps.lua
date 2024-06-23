@@ -1,24 +1,19 @@
 vim.g.mapleader = " "
 local keymap = vim.keymap
 
+-- /home/abhidahal/.local/share/nvim/lazy/LazyVim/lazygit.lua
+-- :174
+--     os.execute("xdg-open " .. remote.url)
+
 -- Quick Exit
 keymap.set("i", "jk", "<ESC>", { desc = "Exit Insert" })
 
--- Number Increment
-keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" })
-keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
-
--- New Line
 keymap.set("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
 keymap.set("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
-
--- Rename
-
-keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename File" })
 
 -- Move Lines
 keymap.set("n", "<A-down>", "<cmd>m .+1<cr>==", { desc = "Move down" })

@@ -9,7 +9,7 @@ function mkcd() {
 		echo -e "\e[31mdirectory field can't be empty\n\e[0mmkcd <directory>"
 		return
 	fi
-	mkdir "${DIR}" && cd "${DIR}"
+	mkdir "${DIR}" && cd "${DIR}" || exit
 }
 
 function x() {
@@ -32,10 +32,10 @@ function cl() {
 function ghp() {
 	KEYWORD="$*"
 	if [ $# -lt 1 ]; then
-		echo -e "\e[31mcommand cannot be empty\n\e[0mghp <git-command>"
+		cat ~/.config/aliases/.gitCommands | fzf --prompt="Grep Word " --pointer="⇏" | wl-copy
 		return
 	fi
-	cat ~/.config/aliases/.gitCommands | grep $KEYWORD
+	cat ~/.config/aliases/.gitCommands | grep "$KEYWORD"
 }
 
 function search() {
@@ -44,7 +44,7 @@ function search() {
 		echo -e "\e[31mcommand cannot be empty\n\e[0msearch <keyword>"
 		return
 	fi
-	echo $KEYWORD
+	echo "$KEYWORD"
 	firefox --new-tab "https://www.google.com/search?client=firefox-b-d&q=${KEYWORD// /+}" &
 
 }
@@ -55,7 +55,7 @@ function gcnpr() {
 		echo -e "\e[31mcommand cannot be empty\n\e[0mgcnpr <ticket> <message>"
 		return
 	fi
-	git checkout -b $TICKET && git commit -m "$MESSAGE" && git push origin $TICKET && git checkout -
+	git checkout -b "$TICKET" && git commit -m "$MESSAGE" && git push origin "$TICKET" && git checkout -
 }
 
 function gcpr() {
@@ -112,16 +112,16 @@ function lss() {
 		echo -e "\e[31mdirectory field can't be empty\n\e[0mlss <word>"
 		return
 	fi
-	hg ${WORD} | fzf --prompt="Directory " --pointer="⇏"
+	hg "${WORD}" | fzf --prompt="Directory " --pointer="⇏"
 }
 
 function ipaddr() {
 	if [ $# -lt 1 ]; then
 		echo "Device IPv4 IP:"
 		ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | sed -n 2p
-		echo "\e\nDevice IPv6 IP:"
+		printf "\e\nDevice IPv6 IP:"
 		ip -6 addr | grep -oP '(?<=inet6\s)[\da-f:]+' | sed -n 2p
-		echo "\e\nNetwork Public IP:"
+		printf "\e\nNetwork Public IP:"
 		curl -s 'http://checkip.dyndns.org' | sed 's/.*Current IP Address: \([0-9\.]*\).*/\1/g'
 		return
 	fi
