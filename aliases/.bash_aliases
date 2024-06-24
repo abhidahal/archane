@@ -83,7 +83,7 @@ alias help='tldr --list  | fzf --preview="tldr {1} --color=always" --preview-win
 alias serve="browser-sync start --server --files ."
 
 # Copies the current directory path to the clipboard
-alias pwd="pwd | wl-copy"
+alias pwdc="pwd | wl-copy"
 
 # Handy change dir shortcuts
 alias ..='cd ..'
