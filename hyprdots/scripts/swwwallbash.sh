@@ -26,6 +26,7 @@ source "${wallbashOut}"
 [ "${dcol_mode}" == "dark" ] && dcol_invt="light" || dcol_invt="dark"
 set +a
 
+
 #// deploy wallbash colors
 
 fn_wallbash () {
@@ -246,6 +247,16 @@ elif [ "${enableWallDcol}" -gt 0 ] ; then
     echo ":: deploying wallbash colors :: ${dcol_mode} wallpaper detected"
     find "${wallbashDir}/Wall-Dcol" -type f -name "*.dcol" | parallel fn_wallbash {}
 
+fi
+
+#  Theme mode: detects the color-scheme set in hypr.theme and falls back if nothing is parsed.
+if [ "${enableWallDcol}" -eq 0 ]; then
+    colorScheme="$({ grep -q "^[[:space:]]*\$COLOR-SCHEME\s*=" "${hydeThemeDir}/hypr.theme" && grep "^[[:space:]]*\$COLOR-SCHEME\s*=" "${hydeThemeDir}/hypr.theme" | cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' ;} || 
+                    grep 'gsettings set org.gnome.desktop.interface color-scheme' "${hydeThemeDir}/hypr.theme" | awk -F "'" '{print $((NF - 1))}')"
+    colorScheme=${colorScheme:-$(gsettings get org.gnome.desktop.interface color-scheme)} 
+    # should be declared explicitly so we can easily debug
+    grep -q "dark" <<< "${colorScheme}" && enableWallDcol=2
+    grep -q "light" <<< "${colorScheme}" && enableWallDcol=3 
 fi
 
 find "${wallbashDir}/Wall-Ways" -type f -name "*.dcol" | parallel fn_wallbash {}
