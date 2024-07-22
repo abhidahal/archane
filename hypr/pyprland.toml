@@ -33,27 +33,30 @@ animation = "fromBottom"
 command = "kitty --class kitty-dropterm-main"
 class = "kitty-dropterm-main"
 size = "96% 93%"
-lazy = false
+lazy =false
 
 [shortcuts_menu.entries]
 "LocalHost" = 'firefox --new-tab "http://localhost:3000" &'
-"Email" = "wl-copy <email>"
+"Email" = "wl-copy abhidahal7@gmail.com"
+
 # [shortcuts_menu.entries.Configs]
 "Kitty" = "kitty  nvim ~/.config/kitty/kitty.conf"
-"Scripts" = "kitty  nvim ~/.config/hyprdots/scripts"
 "Hypr" = "kitty  nvim ~/.config/hypr/keybindings.conf"
+"Scripts" = "kitty  nvim ~/.config/hyprdots/scripts"
 "Nvim" = "kitty  nvim ~/.config/nvim"
 "Aliases" = "kitty  nvim ~/.config/aliases/.bash_aliases"
 
 [shortcuts_menu.entries."VPN"]
-"Username" = "wl-copy <username>"
-"Password" = "wl-copy <password>"
+"Username" = "wl-copy HlCG6h1hfD8XAzPO"
+"Password" = "wl-copy AU0JlbRmgLjQA0BrEoPK2ofvobyZp8f1"
+
 
 [shortcuts_menu.entries.Hydra]
-"code" = 'kitty --class kitty-dropterm-main  nvim ~/work/hydra-den-web/'
-"Web Repo" = 'firefox --new-tab "<link>" &'
-"Admin Repo" = 'firefox --new-tab "<link>" &'
-"Swagger" = 'firefox --new-tab "<link>" &'
+"code" = 'kitty  nvim ~/work/hydra-den-web/'
+"Web Repo" = 'firefox --new-tab "https://github.com/h3cksamrat/hydra-den-web/" &'
+"Admin Repo" = 'firefox --new-tab "https://github.com/h3cksamrat/hydra-den-admin-web/" &'
+"Swagger" = 'firefox --new-tab "https://roseapi.theasteroid.tech/api-docs" &'
+
 
 [scratchpads.dolphin]
 animation = "fromRight"
