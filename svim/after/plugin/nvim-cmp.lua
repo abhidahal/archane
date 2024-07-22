@@ -1,12 +1,16 @@
 local cmp = require('cmp')
 local lspkind = require("lspkind")
 
+vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess:append "c"
+
+vim.api.nvim_set_option('updatetime', 300)
 
 return cmp.setup({
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      require('vsnip').lsp_expand(args.body) -- For `vsnip` users.
     end,
   },
   window = {
@@ -29,16 +33,19 @@ formatting = {
         nvim_lsp = "[LSP]",
         nvim_lua = "[api]",
         path = "[path]",
-        luasnip = "[snip]",
+        luasnip = "[lsnip]",
+        vsnip = "[vsnip]",
       },
     },
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
     { name = 'path' },
-    { name = 'luasnip' }, -- For luasnip users.
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'vsnip', keyword_length=2 },
+    { name = 'nvim_lua', keyword_length=2 },
+    { name = 'luasnip', keyword_length=2 }, -- For luasnip users.
   }, {
-    { name = 'buffer' },
+    { name = 'buffer', keyword_length=2 },
   })
 })

@@ -20,11 +20,17 @@ alias ll='ls -l --color=auto --group-directories-first'
 # Lists all files in long format, with directories listed first
 alias la='ls -al --color=auto --group-directories-first'
 
-# Opens the current directory in Windows Explorer (only works on Windows Subsystem for Linux)
-alias exp='explorer.exe .'
+# lazygit alias
+alias lg='lazygit'
 
 # Uses bat instead of cat for syntax highlighting
 alias cat='bat'
+
+alias cd='z'
+
+alias neofetch='fastfetch'
+
+alias svim='NVIM_APPNAME=svim nvim svim'
 
 # Uses GitHub Copilot to explain code
 alias explain='gh copilot explain'
@@ -71,7 +77,7 @@ alias pc='$aurhelper -Sc'
 alias dolph='dolphin . &'
 
 # Controls RGB lighting on Acer Predator laptops
-alias rgb='~/.config/acer-predator-turbo-and-rgb-keyboard-linux-module/facer_rgb.py'
+alias rgb='~/.config/acerSense/facer_rgb.py'
 
 # Organizes the Downloads directory
 alias sortDownloads='cd ~/Downloads/ && python -u ~/.config/hyprdots/scripts/downloadOrganizer.py && cd -'
@@ -94,3 +100,6 @@ alias .5='cd ../../../../..'
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 alias ssh='kitten ssh'
+
+alias kittykeys="fzfHelp $KittyConfig"
+alias hyprkeys="fzfHelp $HyprConfig"

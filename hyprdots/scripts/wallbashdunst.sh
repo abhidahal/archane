@@ -2,15 +2,15 @@
 
 # set variables
 
-ScrDir=`dirname "$(realpath "$0")"`
-source $ScrDir/globalcontrol.sh
-dstDir="${XDG_CONFIG_HOME:-$HOME/.config}/dunst"
+scrDir=`dirname "$(realpath "$0")"`
+source $scrDir/globalcontrol.sh
+dstDir="${confDir}/dunst"
 
 # regen conf
 
 export hypr_border
 envsubst < "${dstDir}/dunst.conf" > "${dstDir}/dunstrc"
-cat "${dstDir}/Wall-Dcol.conf" >> "${dstDir}/dunstrc"
+envsubst < "${dstDir}/wallbash.conf" >> "${dstDir}/dunstrc"
 killall dunst
 dunst &
 

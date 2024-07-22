@@ -4,7 +4,7 @@ MenuBar=Disabled
 update_info=dolphin_detailsmodesettings.upd:rename-leading-padding
 
 [ExtractDialog]
-2560x1440 screen: Window-Maximized=true
+2256x1269 screen: Window-Maximized=true
 DirHistory[$e]=$HOME/Downloads/
 
 [General]
@@ -14,9 +14,8 @@ Version=202
 ViewPropsTimestamp=2023,4,26,16,58,48.324
 
 [IconsMode]
-IconSize=192
 MaximumTextLines=1
-PreviewSize=112
+PreviewSize=176
 
 [InformationPanel]
 dateFormat=ShortFormat

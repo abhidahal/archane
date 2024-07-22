@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2312
 # shellcheck disable=SC1090
-ScrDir=`dirname "$(realpath "$0")"`
+scrDir=`dirname "$(realpath "$0")"`
 gpuQ="/tmp/hyprdots-${UID}-gpuinfo-query"
 
 tired=false
@@ -143,7 +143,7 @@ get_icons() {
     temp_lv="85:&🌋, 65:&🔥, 45:&☁️, &❄️"
     util_lv="90:, 60:󰓅, 30:󰾅, 󰾆"
 
-    # return comma seperated emojis/icons
+    # return comma separated emojis/icons
     icons=$(map_floor "$temp_lv" $1 | sed "s/&/,/")
     icons="$icons,$(map_floor "$util_lv" $2)"
     echo $icons
@@ -224,10 +224,10 @@ fi
   power_limit="${gpu_data[5]// /}"
 }
 
-amd_GPU() { #? Funtion to query amd GPU
+amd_GPU() { #? Function to query amd GPU
   primary_gpu="AMD ${amd_gpu}"
     # Execute the AMD GPU Python script and use its output
-  amd_output=$(python3 ${ScrDir}/amdgpu.py)
+  amd_output=$(python3 ${scrDir}/amdgpu.py)
 if [[ ! ${amd_output} == *"No AMD GPUs detected."* ]] && [[ ! ${amd_output} == *"Unknown query failure"* ]]; then
   # Extract GPU Temperature, GPU Load, GPU Core Clock, and GPU Power Usage from amd_output
   temperature=$(echo "${amd_output}" | jq -r '.["GPU Temperature"]' | sed 's/°C//')
@@ -264,7 +264,7 @@ echo -e "Sensor: ${next_prioGPU} GPU" | sed 's/_flag//g'
 gpu_flags=$(grep "flag=1" "${gpuQ}" | cut -d '=' -f 1 | tr '\n' ' ' | tr -d '#')
 cat << EOF
 
-Avalable GPU: ${gpu_flags//_flag/}
+Avialable GPU: ${gpu_flags//_flag/}
 [options]
 --toggle         * Toggle available GPU
 --use [GPU]      * Only call the specified GPU (Useful for adding specific GPU on waybar)

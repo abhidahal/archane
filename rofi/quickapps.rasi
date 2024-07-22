@@ -4,7 +4,7 @@ configuration {
     show-icons:                  true;
 }
 
-@theme "~/.config/rofi/themes/theme.rasi"
+@theme "~/.config/rofi/theme.rasi"
 
 
 // Main //
@@ -60,11 +60,6 @@ element {
     padding:                     0em;
     cursor:                      pointer;
     background-color:            transparent;
-}
-@media(max-aspect-ratio: 1.8) {
-    element {
-        orientation:             vertical;
-    }
 }
 element selected.normal {
     background-color:            @main-fg;

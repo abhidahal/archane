@@ -1,77 +1,59 @@
 #!/usr/bin/env sh
 
-# set variables
-ScrDir=$(dirname "$(realpath "$0")")
-source $ScrDir/globalcontrol.sh
-RofiConf="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/themeselect.rasi"
 
-# scale for monitor x res
-x_monres=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
-monitor_scale=$(hyprctl -j monitors | jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
-x_monres=$((x_monres * 17 / monitor_scale))
+#// set variables
 
-# set rofi override
-elem_border=$((hypr_border * 5))
-icon_border=$((elem_border - 5))
-r_override="element{border-radius:${elem_border}px;} element-icon{border-radius:${icon_border}px;size:${x_monres}px;}"
+scrDir="$(dirname "$(realpath "$0")")"
+source "${scrDir}/globalcontrol.sh"
+rofiConf="${confDir}/rofi/selector.rasi"
 
-# launch rofi menu
-ThemeSel=$(cat "$ThemeCtl" | while read line; do
-	thm=$(echo $line | cut -d '|' -f 2)
-	wal=$(echo $line | awk -F '/' '{print $NF}')
-	echo -en "$thm\x00icon\x1f$cacheDir/${thm}/${wal}\n"
-done | rofi -dmenu -theme-str "${r_override}" -config $RofiConf -select "${gtkTheme}")
 
-# apply theme
-ThemeNvimFile="$HOME/.config/nvim/lua/plugins/setTheme.lua"
-if [ ! -z $ThemeSel ]; then
-	"${ScrDir}/themeswitch.sh" -s $ThemeSel
-	notify-send -a "t1" -i "~/.config/dunst/icons/hyprdots.png" " ${ThemeSel}"
+#// set rofi scaling
 
-	case $ThemeSel in
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
+elem_border=$(( hypr_border * 5 ))
+icon_border=$(( elem_border - 5 ))
 
-	"Catppuccin-Mocha")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-macchiato"/' $ThemeNvimFile
-		;;
 
-	"Catppuccin-Latte")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-latte"/' $ThemeNvimFile
-		;;
+#// scale for monitor
 
-	"Decay-Green")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "dark-decay"/' $ThemeNvimFile
-		;;
+mon_x_res=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
+mon_scale=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .scale' | sed "s/\.//")
+mon_x_res=$(( mon_x_res * 100 / mon_scale ))
 
-	"Rose-Pine")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "rose-pine"/' $ThemeNvimFile
-		;;
 
-	"Tokyo-Night")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "tokyonight-storm"/' $ThemeNvimFile
-		;;
+#// generate config
 
-	"Material-Sakura")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "rose-pine-dawn"/' $ThemeNvimFile
-		;;
+case "${themeSelect}" in
+2) # adapt to style 2
+    elm_width=$(( (20 + 12) * rofiScale * 2 ))
+    max_avail=$(( mon_x_res - (4 * rofiScale) ))
+    col_count=$(( max_avail / elm_width ))
+    r_override="window{width:100%;background-color:#00000003;} listview{columns:${col_count};} element{border-radius:${elem_border}px;background-color:@main-bg;} element-icon{size:20em;border-radius:${icon_border}px 0px 0px ${icon_border}px;}"
+    thmbExtn="quad" ;;
+*) # default to style 1
+    elm_width=$(( (23 + 12 + 1) * rofiScale * 2 ))
+    max_avail=$(( mon_x_res - (4 * rofiScale) ))
+    col_count=$(( max_avail / elm_width ))
+    r_override="window{width:100%;} listview{columns:${col_count};} element{border-radius:${elem_border}px;padding:0.5em;} element-icon{size:23em;border-radius:${icon_border}px;}"
+    thmbExtn="sqre" ;;
+esac
 
-	"Graphite-Mono")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "kanagawa-dragon"/' $ThemeNvimFile
-		;;
 
-	"Cyberpunk-Edge")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "koehler"/' $ThemeNvimFile
-		;;
+#// launch rofi menu
 
-	"Frosted-Glass")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin"/' $ThemeNvimFile
-		;;
+get_themes
 
-	"Gruvbox-Retro")
-		sed -i 's/colorscheme.=.".*\"/colorscheme = "gruvbox"/' $ThemeNvimFile
-		;;
+rofiSel=$(for i in ${!thmList[@]} ; do
+    echo -en "${thmList[i]}\x00icon\x1f${thmbDir}/$(set_hash "${thmWall[i]}").${thmbExtn}\n"
+done | rofi -dmenu -theme-str "${r_scale}" -theme-str "${r_override}" -config "${rofiConf}" -select "${hydeTheme}")
 
-	*)
-		echo "Invalid"
-		;;
-	esac
+
+#// apply theme
+
+if [ ! -z "${rofiSel}" ] ; then
+    "${scrDir}/themeswitch.sh" -s "${rofiSel}"
+    notify-send -a "t1" -i "$HOME/.config/dunst/icons/hyprdots.png" " ${rofiSel}"
 fi
+

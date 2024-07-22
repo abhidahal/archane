@@ -33,35 +33,27 @@ animation = "fromBottom"
 command = "kitty --class kitty-dropterm-main"
 class = "kitty-dropterm-main"
 size = "96% 93%"
-lazy =false
+lazy = false
 
 [shortcuts_menu.entries]
 "LocalHost" = 'firefox --new-tab "http://localhost:3000" &'
 "Email" = "wl-copy <email>"
+# [shortcuts_menu.entries.Configs]
+"Kitty" = "kitty  nvim ~/.config/kitty/kitty.conf"
+"Scripts" = "kitty  nvim ~/.config/hyprdots/scripts"
+"Hypr" = "kitty  nvim ~/.config/hypr/keybindings.conf"
+"Nvim" = "kitty  nvim ~/.config/nvim"
+"Aliases" = "kitty  nvim ~/.config/aliases/.bash_aliases"
 
 [shortcuts_menu.entries."VPN"]
 "Username" = "wl-copy <username>"
 "Password" = "wl-copy <password>"
 
-[shortcuts_menu.entries.Configs]
-"Kitty" = "kitty --class kitty-kittyConf nvim ~/.config/kitty/kitty.conf"
-"Hypr" = "kitty --class kitty-hyprConfig nvim ~/.config/hypr/keybindings.conf"
-"Scripts" = "kitty --class kitty-scriptsConf nvim ~/.config/hyprdots/scripts"
-"Nvim" = "kitty --class kitty-nvimConf nvim ~/.config/nvim"
-"Aliases" = "kitty --class kitty-Aliases nvim ~/.config/aliases/.bash_aliases"
-
 [shortcuts_menu.entries.Hydra]
+"code" = 'kitty --class kitty-dropterm-main  nvim ~/work/hydra-den-web/'
 "Web Repo" = 'firefox --new-tab "<link>" &'
 "Admin Repo" = 'firefox --new-tab "<link>" &'
 "Swagger" = 'firefox --new-tab "<link>" &'
-
-[scratchpads.htop]
-animation = "fromLeft"
-command = "kitty --class kitty-htop htop"
-class = "kitty-htop"
-lazy = true
-size = "50% 90%"
-unfocus = "hide"
 
 [scratchpads.dolphin]
 animation = "fromRight"

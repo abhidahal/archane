@@ -3,8 +3,9 @@
 
 # read control file and initialize variables
 
-export ScrDir=`dirname "$(realpath "$0")"`
-waybar_dir="${XDG_CONFIG_HOME:-$HOME/.config}/waybar"
+export scrDir="$(dirname "$(realpath "$0")")"
+source "${scrDir}/globalcontrol.sh"
+waybar_dir="${confDir}/waybar"
 modules_dir="$waybar_dir/modules"
 conf_file="$waybar_dir/config.jsonc"
 conf_ctl="$waybar_dir/config.ctl"
@@ -36,7 +37,7 @@ fi
 
 if [ $switch -eq 1 ] ; then
     update_ctl="${read_ctl[nextIndex]}"
-    export reload_flag=1
+    reload_flag=1
     sed -i "s/^1/0/g" $conf_ctl
     awk -F '|' -v cmp="$update_ctl" '{OFS=FS} {if($0==cmp) $1=1; print$0}' $conf_ctl > $waybar_dir/tmp && mv $waybar_dir/tmp $conf_ctl
 fi
@@ -64,7 +65,7 @@ if [ $i_size -lt 12 ] ; then
     export i_size="12"
 fi
 
-export i_theme=`gsettings get org.gnome.desktop.interface icon-theme | sed "s/'//g"`
+export i_theme="$(grep 'gsettings set org.gnome.desktop.interface icon-theme' "${hydeThemeDir}/hypr.theme" | awk -F "'" '{print $((NF - 1))}')"
 export i_task=$(( w_height*6/10 ))
 if [ $i_task -lt 16 ] ; then
     export i_task="16"
@@ -116,8 +117,15 @@ done
 cat $modules_dir/footer.jsonc >> $conf_file
 
 
-# generate style and restart waybar
+# generate style
 
-$ScrDir/wbarstylegen.sh
+$scrDir/wbarstylegen.sh
 
+
+# restart waybar
+
+if [ "$reload_flag" == "1" ] ; then
+    killall waybar
+    waybar --config ${waybar_dir}/config.jsonc --style ${waybar_dir}/style.css > /dev/null 2>&1 &
+fi
 

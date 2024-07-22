@@ -1,36 +1,51 @@
 #!/usr/bin/env sh
 
-# set variables
-ScrDir=`dirname "$(realpath "$0")"`
-source $ScrDir/globalcontrol.sh
-RofiConf="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/themeselect.rasi"
-RofiStyle="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/styles"
-RofiAssets="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/assets"
-Rofilaunch="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
+
+#// set variables
+
+scrDir="$(dirname "$(realpath "$0")")"
+source "${scrDir}/globalcontrol.sh"
+rofiConf="${confDir}/rofi/selector.rasi"
+rofiStyleDir="${confDir}/rofi/styles"
+rofiAssetDir="${confDir}/rofi/assets"
 
 
-# scale for monitor x res
-x_monres=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
-monitor_scale=$(hyprctl -j monitors | jq '.[] | select (.focused == true) | .scale' | sed 's/\.//')
-x_monres=$(( x_monres * 18 / monitor_scale ))
+#// set rofi scaling
 
-
-# set rofi override
+[[ "${rofiScale}" =~ ^[0-9]+$ ]] || rofiScale=10
+r_scale="configuration {font: \"JetBrainsMono Nerd Font ${rofiScale}\";}"
 elem_border=$(( hypr_border * 5 ))
 icon_border=$(( elem_border - 5 ))
-r_override="listview{columns:4;} element{orientation:vertical;border-radius:${elem_border}px;} element-icon{border-radius:${icon_border}px;size:${x_monres}px;} element-text{enabled:false;}"
 
 
-# launch rofi menu
-RofiSel=$( ls ${RofiStyle}/style_*.rasi | awk -F '/' '{print $NF}' | cut -d '.' -f 1 | while read rstyle
+#// scale for monitor
+
+mon_x_res=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .width')
+mon_scale=$(hyprctl -j monitors | jq '.[] | select(.focused==true) | .scale' | sed "s/\.//")
+mon_x_res=$(( mon_x_res * 100 / mon_scale ))
+
+
+#// generate config
+
+elm_width=$(( (20 + 12 + 16 ) * rofiScale ))
+max_avail=$(( mon_x_res - (4 * rofiScale) ))
+col_count=$(( max_avail / elm_width ))
+[[ "${col_count}" -gt 5 ]] && col_count=5
+r_override="window{width:100%;} listview{columns:${col_count};} element{orientation:vertical;border-radius:${elem_border}px;} element-icon{border-radius:${icon_border}px;size:20em;} element-text{enabled:false;}"
+
+
+#// launch rofi menu
+
+RofiSel=$(ls ${rofiStyleDir}/style_*.rasi | awk -F '[_.]' '{print $((NF - 1))}' | while read styleNum
 do
-    echo -en "$rstyle\x00icon\x1f${RofiAssets}/${rstyle}.png\n"
-done | rofi -dmenu -theme-str "${r_override}" -config $RofiConf)
+    echo -en "${styleNum}\x00icon\x1f${rofiAssetDir}/style_${styleNum}.png\n"
+done | sort -n | rofi -dmenu -theme-str "${r_override}" -config "${rofiConf}" -select "${rofiStyle}")
 
 
-# apply rofi style
-if [ ! -z $RofiSel ] ; then
-    cp "${RofiStyle}/${RofiSel}.rasi" "${Rofilaunch}"
-    notify-send -a "t1" -r 91190 -t 2200 -i "${RofiAssets}/${RofiSel}.png" " ${RofiSel} applied..." 
+#// apply rofi style
+
+if [ ! -z "${RofiSel}" ] ; then
+    set_conf "rofiStyle" "${RofiSel}"
+    notify-send -a "t1" -r 91190 -t 2200 -i "${rofiAssetDir}/style_${RofiSel}.png" " style ${RofiSel} applied..." 
 fi
 

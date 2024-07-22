@@ -1,4 +1,4 @@
-local nnoremap = require("abhidahal.keymap").nnoremap
+local nnoremap = require("h3cksamrat.keymap").nnoremap
 
 function ContextSetup(show_all_context)
 	require("treesitter-context").setup({

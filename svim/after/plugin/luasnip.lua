@@ -25,4 +25,4 @@ ls.config.set_config {
   }
 }
 
-require("abhidahal.luasnip.snippets")
+require("h3cksamrat.luasnip.snippets")

@@ -3,22 +3,14 @@
 
 # detect hypr theme and initialize variables
 
-ScrDir=`dirname "$(realpath "$0")"`
-source $ScrDir/globalcontrol.sh
-waybar_dir="${XDG_CONFIG_HOME:-$HOME/.config}/waybar"
+scrDir=`dirname "$(realpath "$0")"`
+source $scrDir/globalcontrol.sh
+waybar_dir="${confDir}/waybar"
 modules_dir="$waybar_dir/modules"
 conf_ctl="$waybar_dir/config.ctl"
 in_file="$waybar_dir/modules/style.css"
 out_file="$waybar_dir/style.css"
-src_file="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/themes/theme.conf"
-
-if [ "$EnableWallDcol" -eq 1 ] ; then
-    ln -fs $waybar_dir/themes/Wall-Dcol.css $waybar_dir/themes/theme.css
-    reload_flag=1
-elif [ $(readlink $waybar_dir/themes/theme.css) != "$waybar_dir/themes/${gtkTheme}.css" ] ; then
-    ln -fs $waybar_dir/themes/${gtkTheme}.css $waybar_dir/themes/theme.css
-    reload_flag=1
-fi
+src_file="${confDir}/hypr/themes/theme.conf"
 
 
 # calculate height from control file or monitor res
@@ -122,14 +114,5 @@ envsubst < $in_file > $out_file
 hypr_border=`awk -F '=' '{if($1~" rounding ") print $2}' $src_file | sed 's/ //g'`
 if [ "$hypr_border" == "0" ] ; then
     sed -i "/border-radius: /c\    border-radius: 0px;" $out_file
-fi
-
-
-# restart waybar
-
-if [ "$reload_flag" == "1" ] ; then
-    killall waybar
-    waybar > /dev/null 2>&1 &
-    # killall -SIGUSR2 waybar
 fi
 

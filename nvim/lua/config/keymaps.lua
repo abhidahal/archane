@@ -34,5 +34,5 @@ keymap.set("i", "<C-bs>", "<ESC>ciw", { desc = "Delete" })
 -- keymap.set("v", "p", '"_dP')
 
 -- Keep window centered when going up/down
-keymap.set("n", "n", "nzzzv")
-keymap.set("n", "N", "Nzzzv")
+-- keymap.set("n", "n", "nzzzv")
+-- keymap.set("n", "N", "Nzzzv")

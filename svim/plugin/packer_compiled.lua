@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/abhidahal/.cache/svim/packer_hererocks/2.1.1702233742/share/lua/5.1/?.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1702233742/share/lua/5.1/?/init.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1702233742/lib/luarocks/rocks-5.1/?.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1702233742/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/abhidahal/.cache/svim/packer_hererocks/2.1.1702233742/lib/lua/5.1/?.so"
+local package_path_str = "/home/abhidahal/.cache/svim/packer_hererocks/2.1.1713484068/share/lua/5.1/?.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1713484068/share/lua/5.1/?/init.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?.lua;/home/abhidahal/.cache/svim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/abhidahal/.cache/svim/packer_hererocks/2.1.1713484068/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -99,10 +99,25 @@ _G.packer_plugins = {
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lsp-signature-help"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/cmp-nvim-lsp-signature-help",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["cmp-vsnip"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/cmp-vsnip",
+    url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   cmp_luasnip = {
     loaded = true,
@@ -199,10 +214,20 @@ _G.packer_plugins = {
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/nvim-dap-virtual-text",
     url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
+  ["nvim-lightbulb"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/nvim-lightbulb",
+    url = "https://github.com/kosayoda/nvim-lightbulb"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-nio"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/nvim-nio",
+    url = "https://github.com/nvim-neotest/nvim-nio"
   },
   ["nvim-surround"] = {
     loaded = true,
@@ -259,6 +284,11 @@ _G.packer_plugins = {
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/rainbow",
     url = "https://github.com/luochen1990/rainbow"
   },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
+  },
   ["telescope-dap.nvim"] = {
     loaded = true,
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/telescope-dap.nvim",
@@ -284,6 +314,11 @@ _G.packer_plugins = {
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-javascript"] = {
     loaded = true,
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/vim-javascript",
@@ -303,6 +338,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/vim-startuptime",
     url = "https://github.com/dstein64/vim-startuptime"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/vim-vsnip",
+    url = "https://github.com/hrsh7th/vim-vsnip"
+  },
+  ["vim-wakatime"] = {
+    loaded = true,
+    path = "/home/abhidahal/.local/share/svim/site/pack/packer/start/vim-wakatime",
+    url = "https://github.com/wakatime/vim-wakatime"
   },
   vimwiki = {
     loaded = true,

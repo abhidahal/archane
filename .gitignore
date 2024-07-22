@@ -1,74 +1,36 @@
 # Non-Config Program files
 
-Code
+mimeapps.list
+kiorc
+kdeglobals
+pavucontrol.ini
+code-flags.conf
+baloofileinformationrc
+arkrc
+
+zed
+kwalletrc
+xsettingsd
+systemd
+spotify
+spicetify
+session
+protonvpn
+pulse
+procps
+predator
+obsidian
+nwg-look
+nextjs-nodejs
+microsoft-edge
+menus
+kde.org
+create-next-app-nodejs 
+dconf
+cfg_backups
 Code - OSS
 Docker Desktop
-Insomnia
-QtProject
-cfg_backups
-configstore
-create-next-app-nodejs
-dconf
-discord
-figma-linux
-github-copilot
-google-chrome
-kde.org
-lazygit
-microsoft-edge
-nextjs-nodejs
-nwg-look
-obs-studio
-procps
-pulse
-session
-swappy
-vlc
-xsettingsd
-yay
-arkrc
-baloofileinformationrc
-kconf_updaterc
-kdeglobals
-kiorc
-mimeapps.list
-trashrc
-spotify
-kdeconnect
-menus
-QtProject.conf
 gh
-libvirt
-remmina
-yarn
-spicetify
-obsidian
-protonvpn
-user-dirs.dirs
-user-dirs.locale
-
-# Dynamic Files
-# Kvantum/kvantum.kvconfig
-# dunst/Wall-Dcol.conf
-# dunst/dunstrc
-# dunst/icons/hyprdots.svg
-# dunst/icons/vol/*
-# gtk-3.0/settings.ini
-# gtk-4.0
-# hypr/theme.ctl
-# hypr/themes/Wall-Dcol.conf
-# hypr/themes/colors.conf
-# hypr/themes/theme.conf
-# hypr/wallbash/palette.svg
-# kitty/themes/theme.conf
-# nvim/lua/plugins/setTheme.lua
-# qt5ct/qt5ct.conf
-# rofi/themes/Wall-Dcol.rasi
-# rofi/themes/theme.rasi
-# swww/wall.blur
-# swww/wall.rofi
-# swww/wall.set
-# waybar/config.ctl
-# waybar/config.jsonc
-# waybar/style.css
-# waybar/themes/Wall-Dcol.css
+Kvantum
+gh-copilot
+github-copilot 

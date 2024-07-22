@@ -9,6 +9,7 @@
 
 colorProfile="default"
 wallbashCurve="32 50\n42 46\n49 40\n56 39\n64 38\n76 37\n90 33\n94 29\n100 20"
+sortMode="auto"
 
 while [ $# -gt 0 ] ; do
     case "$1" in
@@ -21,6 +22,22 @@ while [ $# -gt 0 ] ; do
         -m|--mono) colorProfile="mono"
             wallbashCurve="10 0\n17 0\n24 0\n39 0\n51 0\n58 0\n72 0\n84 0\n99 0"
             ;;
+        -c|--custom)
+            shift
+            if [ -n "${1}" ] && [[ "${1}" =~ ^([0-9]+[[:space:]][0-9]+\\n){8}[0-9]+[[:space:]][0-9]+$ ]] ; then
+                    colorProfile="custom"
+                    wallbashCurve="${1}"
+            else
+                echo "Error: Custom color curve format is incorrect ${1}"
+                exit 1
+            fi
+            ;;
+        -d|--dark) sortMode="dark"
+            colSort=""
+            ;;
+        -l|--light) sortMode="light"
+            colSort="-r"
+            ;;
         *) break
             ;;
     esac
@@ -30,15 +47,12 @@ done
 
 #// set variables
 
-cacheDir="$HOME/.cache/hyprdots"
 wallbashImg="${1}"
 wallbashColors=4
 wallbashFuzz=70
-cacheImg=$(basename "${wallbashImg}")
-cacheThm=$(dirname "${wallbashImg}" | awk -F '/' '{print $NF}')
-wallbashRaw="${cacheDir}/${cacheThm}/${cacheImg}.mpc"
-wallbashOut="${cacheDir}/${cacheThm}/${cacheImg}.dcol"
-wallbashCache="${cacheDir}/${cacheThm}/${cacheImg}.cache"
+wallbashRaw="${2:-"${wallbashImg}"}.mpc"
+wallbashOut="${2:-"${wallbashImg}"}.dcol"
+wallbashCache="${2:-"${wallbashImg}"}.cache"
 
 
 #// color modulations
@@ -66,7 +80,7 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
-echo "wallbash ${colorProfile} profile :: Colors ${wallbashColors} :: Fuzzy ${wallbashFuzz} :: \"${wallbashOut}\""
+echo -e "wallbash ${colorProfile} profile :: ${sortMode} :: Colors ${wallbashColors} :: Fuzzy ${wallbashFuzz} :: \"${wallbashOut}\""
 mkdir -p "${cacheDir}/${cacheThm}"
 > "${wallbashOut}"
 
@@ -122,12 +136,17 @@ fi
 
 #// sort colors based on image brightness
 
-if fx_brightness "${wallbashRaw}" ; then
-    colSort=""
-else
-    colSort="-r"
+if [ "${sortMode}" == "auto" ] ; then
+    if fx_brightness "${wallbashRaw}" ; then
+        sortMode="dark"
+        colSort=""
+    else
+        sortMode="light"
+        colSort="-r"
+    fi
 fi
 
+echo "dcol_mode=\"${sortMode}\"" >> "${wallbashOut}"
 dcolHex=($(echo  -e "${dcolRaw[@]:0:$wallbashColors}" | tr ' ' '\n' | awk -F ',' '{print $2}' | sort ${colSort}))
 greyCheck=$(convert "${wallbashRaw}" -colorspace HSL -channel g -separate +channel -format "%[fx:mean]" info:)
 

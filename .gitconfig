@@ -1,7 +1,7 @@
-
+; ln -s from ~/.gitconfig
 [user]
-	name = abhidahal
-	email = abhidahal7@gmail.com
+	name = <name>
+	email = <email>
 
 [core]
     pager = delta
@@ -23,3 +23,6 @@
 
 [diff]
     colorMoved = default
+
+[init]
+	defaultBranch = main

@@ -6,7 +6,7 @@ configuration {
     font:                        "JetBrainsMono Nerd Font 8";
 }
 
-@theme "~/.config/rofi/themes/theme.rasi"
+@theme "~/.config/rofi/theme.rasi"
 
 
 // Main //
@@ -66,11 +66,6 @@ element {
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @main-fg;
-}
-@media(max-aspect-ratio: 1.8) {
-    element {
-        orientation:             horizontal;
-    }
 }
 element selected.normal {
     background-color:            @select-bg;

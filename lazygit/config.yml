@@ -1,0 +1,15 @@
+git:
+  skipHookPrefix: WIP
+  autoFetch: true
+  autoRefresh: true
+  fetchAll: true
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName} --}
+  allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
+  overrideGpg: false
+  disableForcePushing: false
+  parseEmoji: false
+  truncateCopiedCommitHashesTo: 12
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+    useConfig: false

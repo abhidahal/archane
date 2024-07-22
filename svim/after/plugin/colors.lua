@@ -1,4 +1,4 @@
-vim.g.abhidahal_colorscheme = "tokyonight-night"
+vim.g.h3cksamrat_colorscheme = "tokyonight-night"
 
 function ColorMyPencils()
   vim.g.gruvbox_contrast_dark = 'hard'
@@ -7,7 +7,7 @@ function ColorMyPencils()
   vim.g.gruvbox_invert_selection = '0'
   vim.opt.background = "dark"
 
-  vim.cmd("colorscheme " .. vim.g.abhidahal_colorscheme)
+  vim.cmd("colorscheme " .. vim.g.h3cksamrat_colorscheme)
 
   local hl = function(thing, opts)
     vim.api.nvim_set_hl(0, thing, opts)

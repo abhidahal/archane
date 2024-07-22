@@ -43,7 +43,7 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<Tab>"] = cmp.mapping.confirm({ select = false }),
+        -- ["<Tab>"] = cmp.mapping.select_next_item(),
         ["<Leader>"] = cmp.mapping.confirm({ select = false }),
       }),
       -- sources for autocompletion
@@ -72,6 +72,11 @@ return {
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
+
+    vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      replace_keycodes = false
+    })
 
     local luasnip = require("luasnip")
     local cmp = require("cmp")

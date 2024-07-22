@@ -3,11 +3,11 @@
     border-radius: 0px;
     font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
     min-height: 10px;
 }
 
-@import "themes/theme.css";
+@import "theme.css";
 
 window#waybar {
     background: @bar-bg;
@@ -16,7 +16,7 @@ window#waybar {
 tooltip {
     background: @main-bg;
     color: @main-fg;
-    border-radius: 9px;
+    border-radius: 7px;
     border-width: 0px;
 }
 
@@ -24,7 +24,7 @@ tooltip {
     box-shadow: none;
 	text-shadow: none;
     padding: 0px;
-    border-radius: 11px;
+    border-radius: 9px;
     margin-top: 3px;
     margin-bottom: 3px;
     margin-left: 0px;
@@ -39,8 +39,8 @@ tooltip {
     background: @wb-act-bg;
     color: @wb-act-fg;
     margin-left: 3px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
     margin-right: 3px;
     animation: ws_active 20s ease-in-out 1;
     transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
@@ -57,7 +57,7 @@ tooltip {
     box-shadow: none;
 	text-shadow: none;
     padding: 0px;
-    border-radius: 11px;
+    border-radius: 9px;
     margin-top: 3px;
     margin-bottom: 3px;
     margin-left: 0px;
@@ -72,8 +72,8 @@ tooltip {
     background: @wb-act-bg;
     color: @wb-act-color;
     margin-left: 3px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
     margin-right: 3px;
     animation: tb_active 20s ease-in-out 1;
     transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
@@ -84,6 +84,14 @@ tooltip {
     color: @wb-hvr-color;
     animation: tb_hover 20s ease-in-out 1;
     transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#tray menu * {
+    min-height: 16px
+}
+
+#tray menu separator {
+    min-height: 10px
 }
 
 #backlight,
@@ -100,6 +108,7 @@ tooltip {
 #memory,
 #mpris,
 #network,
+#custom-notifications,
 #custom-power,
 #pulseaudio,
 #custom-spotify,
@@ -120,9 +129,9 @@ tooltip {
     color: @main-fg;
     background: @main-bg;
     opacity: 1;
-    margin: 5px 0px 5px 0px;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin: 4px 0px 4px 0px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 #workspaces,
@@ -131,37 +140,37 @@ tooltip {
 }
 
 #custom-r_end {
-    border-radius: 0px 25px 25px 0px;
-    margin-right: 11px;
+    border-radius: 0px 21px 21px 0px;
+    margin-right: 9px;
     padding-right: 3px;
 }
 
 #custom-l_end {
-    border-radius: 25px 0px 0px 25px;
-    margin-left: 11px;
+    border-radius: 21px 0px 0px 21px;
+    margin-left: 9px;
     padding-left: 3px;
 }
 
 #custom-sr_end {
     border-radius: 0px;
-    margin-right: 11px;
+    margin-right: 9px;
     padding-right: 3px;
 }
 
 #custom-sl_end {
     border-radius: 0px;
-    margin-left: 11px;
+    margin-left: 9px;
     padding-left: 3px;
 }
 
 #custom-rr_end {
-    border-radius: 0px 9px 9px 0px;
-    margin-right: 11px;
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 9px;
     padding-right: 3px;
 }
 
 #custom-rl_end {
-    border-radius: 9px 0px 0px 9px;
-    margin-left: 11px;
+    border-radius: 7px 0px 0px 7px;
+    margin-left: 9px;
     padding-left: 3px;
 }
