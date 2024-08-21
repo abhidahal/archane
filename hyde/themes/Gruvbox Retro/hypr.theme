@@ -45,4 +45,4 @@ decoration {
     }
 }
 
-layerrule = blur,waybar
+# layerrule = blur,waybar

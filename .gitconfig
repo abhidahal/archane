@@ -1,7 +1,7 @@
 ; ln -s from ~/.gitconfig
 [user]
-	name = <name>
-	email = <email>
+	name = abhidahal
+	email = abhidahal7@gmail.com
 
 [core]
     pager = delta

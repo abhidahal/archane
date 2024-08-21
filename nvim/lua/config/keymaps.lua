@@ -1,10 +1,6 @@
 vim.g.mapleader = " "
 local keymap = vim.keymap
 
--- /home/abhidahal/.local/share/nvim/lazy/LazyVim/lazygit.lua
--- :174
---     os.execute("xdg-open " .. remote.url)
-
 -- Quick Exit
 keymap.set("i", "jk", "<ESC>", { desc = "Exit Insert" })
 
@@ -16,14 +12,14 @@ keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
 
 -- Move Lines
-keymap.set("n", "<A-down>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-keymap.set("n", "<A-up>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-keymap.set("i", "<A-down>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-keymap.set("i", "<A-up>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-keymap.set("v", "<A-down>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-keymap.set("v", "<A-up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+-- keymap.set("n", "<A-down>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+-- keymap.set("n", "<A-up>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+-- keymap.set("i", "<A-down>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+-- keymap.set("i", "<A-up>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+-- keymap.set("v", "<A-down>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+-- keymap.set("v", "<A-up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
--- ScreenSHot
+-- ScreenShot
 keymap.set("v", "<leader>cp", ":Silicon<return>", { desc = "Screenshot" })
 keymap.set("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
 

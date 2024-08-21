@@ -8,6 +8,9 @@ code-flags.conf
 baloofileinformationrc
 dolphinrc
 arkrc
+evolution
+vlc
+warp-terminal
 
 zed
 kwalletrc
@@ -36,3 +39,6 @@ Kvantum
 gh-copilot
 github-copilot 
 spotify-flags.conf
+
+baloofilerc
+trashrc

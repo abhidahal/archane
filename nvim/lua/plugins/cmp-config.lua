@@ -1,9 +1,11 @@
 return {
   "hrsh7th/nvim-cmp",
+  version = false, -- last release is way too old
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-buffer", -- source for text in buffer
-    "hrsh7th/cmp-path", -- source for file system paths
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-cmdline",
     {
       "L3MON4D3/LuaSnip",
@@ -12,12 +14,21 @@ return {
       -- install jsregexp (optional!).
       build = "make install_jsregexp",
     },
-    "saadparwaiz1/cmp_luasnip", -- for autocompletion
+    "saadparwaiz1/cmp_luasnip",     -- for autocompletion
     "rafamadriz/friendly-snippets", -- useful snippets
-    "onsails/lspkind.nvim", -- vs-code like pictograms
+    "onsails/lspkind.nvim",         -- vs-code like pictograms
   },
-  config = function()
+
+  ---@param opts cmp.ConfigSchema
+  opts = function(_, opts)
+    vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
+    local defaults = require("cmp.config.default")()
+    local auto_select = true
+    vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      replace_keycodes = false
+    })
 
     local luasnip = require("luasnip")
 
@@ -25,53 +36,6 @@ return {
 
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
-
-    cmp.setup({
-      completion = {
-        completeopt = "menu,menuone,preview,noselect",
-      },
-      snippet = { -- configure how nvim-cmp interacts with snippet engine
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        -- ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<Leader>"] = cmp.mapping.confirm({ select = false }),
-      }),
-      -- sources for autocompletion
-      sources = cmp.config.sources({
-
-        { name = "nvim_lsp" }, -- lsp-cmd
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
-      }),
-
-      -- configure lspkind for vs-code like pictograms in completion menu
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
-      },
-    })
-  end,
-
-  ---@param opts cmp.ConfigSchema
-  opts = function(_, opts)
-    local has_words_before = function()
-      unpack = unpack or table.unpack
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-    end
 
     vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
       expr = true,
@@ -125,5 +89,78 @@ return {
         end
       end, { "i", "s" }),
     })
+
+
+    return {
+      auto_brackets = {}, -- configure any filetype to auto add brackets
+      completion = {
+        completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
+      },
+      snippet = { -- configure how nvim-cmp interacts with snippet engine
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
+        ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-CR>"] = function(fallback)
+          cmp.abort()
+          fallback()
+        end,
+        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        -- ["<Tab>"] = cmp.mapping.select_next_item(),
+        -- ["<Leader>"] = cmp.mapping.confirm({ select = false }),
+      }),
+      -- sources for autocompletion
+      sources = cmp.config.sources({
+
+        { name = "nvim_lsp" },
+        { name = "luasnip" }, -- snippets
+        { name = "buffer" },
+        { name = "path" },
+      }),
+
+      preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+      -- configure lspkind for vs-code like pictograms in completion menu
+      formatting = {
+        format = lspkind.cmp_format({
+          maxwidth = 50,
+          ellipsis_char = "...",
+        }),
+        -- format = function(entry, item)
+        --   local icons = LazyVim.config.icons.kinds
+        --   if icons[item.kind] then
+        --     item.kind = icons[item.kind] .. item.kind
+        --   end
+        --
+        --   local widths = {
+        --     abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+        --     menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+        --   }
+        --
+        --   for key, width in pairs(widths) do
+        --     if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+        --       item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+        --     end
+        --   end
+        --
+        --   return item
+        -- end,
+      },
+      experimental = {
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
+      },
+      sorting = defaults.sorting,
+    }
   end,
+  main = "lazyvim.util.cmp",
 }

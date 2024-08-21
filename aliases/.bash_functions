@@ -121,7 +121,7 @@ function lss() {
     echo -e "\e[31mdirectory field can't be empty\n\e[0mlss <word>"
     return
   fi
-  hg "${WORD}" | fzf --prompt="Directory " --pointer="⇏"
+  hg "${WORD}" | fzf --prompt="Directory " --pointer="⇏" --preview="bat --color=always {}"
 }
 
 function ipaddr() {
@@ -138,12 +138,16 @@ function ipaddr() {
 }
 
 function rgbs() {
-  items=("Wave" "Rainbow" "Pulse" "Fade" "Random")
+  items=("Wave" "Neon" "Static RGB")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Keyboard Light Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
     return 0
   elif [[ $config == "Wave" ]]; then
-    rgb -m 3 -s 5 -b 100
+    rgb -m 3 -s 1 -b 100
+  elif [[ $config == "Neon" ]]; then
+    rgb -m 2 -s 1 -b 100
+  elif [[ $config == "Static RGB" ]]; then
+    rgb -m 3 -s 0 -b 100
   fi
 }
