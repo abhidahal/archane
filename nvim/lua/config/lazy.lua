@@ -11,7 +11,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim",                                      import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     { import = "lazyvim.plugins.extras.coding.copilot-chat" },
     -- { import = "lazyvim.plugins.extras.coding.mini-surround" },
@@ -50,6 +50,7 @@ require("lazy").setup({
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
+        "precognition",
         "gzip",
         "dashboard",
         -- "matchit",
