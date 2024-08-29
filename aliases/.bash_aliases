@@ -100,6 +100,9 @@ alias .5='cd ../../../../..'
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 alias ssh='kitten ssh'
+alias zen="/opt/zen-browser"
+alias calc="gnome-calculator --solve"
+alias atac="~/.cargo/bin/atac"
 
 alias kittykeys="fzfHelp $KittyConfig"
 alias hyprkeys="fzfHelp $HyprConfig"
