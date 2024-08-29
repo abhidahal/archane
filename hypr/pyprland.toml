@@ -36,7 +36,7 @@ size = "96% 93%"
 lazy =false
 
 [shortcuts_menu.entries]
-"LocalHost" = 'firefox --new-tab "http://localhost:3000" &'
+"LocalHost" = '/opt/zen-browser --new-tab "http://localhost:3000" &'
 "Email" = "wl-copy <email>"
 
 # [shortcuts_menu.entries.Configs]
@@ -53,13 +53,13 @@ lazy =false
 
 [shortcuts_menu.entries.Hydra]
 "code" = 'kitty  nvim ~/work/hydra-den-web/'
-"Web Repo" = 'firefox --new-tab <url> &'
-"Admin Repo" = 'firefox --new-tab <url> &'
-"Swagger" = 'firefox --new-tab <url> &'
+"Web Repo" = '/opt/zen-browser --new-tab <url> &'
+"Admin Repo" = '/opt/zen-browser --new-tab <url> &'
+"Swagger" = '/opt/zen-browser --new-tab <url> &'
 
 
 [shortcuts_menu.entries.Browsers]
-"Brave" = 'com.brave.Browser &'
+"Zen" = '/opt/zen-browser &'
 "Edge" = 'microsoft-edge-stable &'
 "Firefox" = 'firefox  &'
 
