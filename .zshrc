@@ -57,6 +57,7 @@ function in {
 # Helpful aliases
 [[ ! -f ~/.config/aliases/.bash_aliases ]] || source ~/.config/aliases/.bash_aliases
 [[ ! -f ~/.config/aliases/.bash_functions ]] || source ~/.config/aliases/.bash_functions
+[[ ! -f ~/.config/aliases/.custom_exports.sh ]] || source ~/.config/aliases/.custom_exports.sh
 
 # fzf config
 [[ ! -f ~/.config/fzf/fzf.sh ]] || source ~/.config/fzf/fzf.sh
