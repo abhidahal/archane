@@ -1,4 +1,4 @@
-# !/usr/bin/env bash
+#!/usr/bin/env bash
 
 eval "$(fzf --zsh)"
 
@@ -7,6 +7,21 @@ eval "$(fzf --zsh)"
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+
+
+export FZF_DEFAULT_OPTS="
+  --pointer='' \
+  --marker='✓' \
+  --info=inline \
+  --layout=reverse \
+  --prompt=' ' \
+  --height=40% \
+  --border \
+  --color=fg:#cad3f5,bg:#181926,hl:#c68aee \
+  --color=fg+:#cad3f5,bg+:#1e2030,hl+:#c68aee \
+  --color=info:#b8c0e0,prompt:#f5a97f,pointer:#f0c6c6,marker:#78dba9,border:#494d64 \
+"
 
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -41,4 +56,4 @@ _fzf_comprun() {
 }
 
 source ~/.config/fzf/fzf-git.sh
-export BAT_THEME=tokyonight_night
+export BAT_THEME="Catppuccin Mocha"
