@@ -14,9 +14,9 @@ return {
       -- install jsregexp (optional!).
       build = "make install_jsregexp",
     },
-    "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+    "saadparwaiz1/cmp_luasnip", -- for autocompletion
     "rafamadriz/friendly-snippets", -- useful snippets
-    "onsails/lspkind.nvim",         -- vs-code like pictograms
+    "onsails/lspkind.nvim", -- vs-code like pictograms
   },
 
   ---@param opts cmp.ConfigSchema
@@ -25,9 +25,9 @@ return {
     local cmp = require("cmp")
     local defaults = require("cmp.config.default")()
     local auto_select = true
-    vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
+    vim.keymap.set("i", "<Tab>", 'copilot#Accept("\\<CR>")', {
       expr = true,
-      replace_keycodes = false
+      replace_keycodes = false,
     })
 
     local luasnip = require("luasnip")
@@ -37,9 +37,9 @@ return {
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
 
-    vim.keymap.set('i', '<Tab>', 'copilot#Accept("\\<CR>")', {
+    vim.keymap.set("i", "<Tab>", 'copilot#Accept("\\<CR>")', {
       expr = true,
-      replace_keycodes = false
+      replace_keycodes = false,
     })
 
     local luasnip = require("luasnip")
@@ -90,7 +90,7 @@ return {
       end, { "i", "s" }),
     })
 
-
+    -- sd
     return {
       auto_brackets = {}, -- configure any filetype to auto add brackets
       completion = {
@@ -113,7 +113,7 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         -- ["<Tab>"] = cmp.mapping.select_next_item(),
         -- ["<Leader>"] = cmp.mapping.confirm({ select = false }),
