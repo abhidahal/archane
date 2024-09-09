@@ -30,6 +30,8 @@ alias cd='z'
 
 alias neofetch='fastfetch'
 
+alias qr='qrencode -t ansiutf8 '
+
 alias svim='NVIM_APPNAME=svim nvim svim'
 
 # Uses GitHub Copilot to explain code
