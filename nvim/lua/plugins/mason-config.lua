@@ -9,7 +9,7 @@ return {
       "shellcheck",
       "shfmt",
       "tailwindcss-language-server",
-      "typescript-language-server",
+      -- "typescript-language-server",
       "eslint-lsp",
       "prettier",
     },

@@ -70,6 +70,8 @@ export PATH="$PATH:/opt/nvim/"
 
 export EDITOR="nvim" 
 export VISUAL="nvim"
+export PAGER="moar"
+export MOAR='--style=catppuccin-frappe --statusbar=bold --colors=256 --follow --quit-if-one-screen'
 
 # Created by `pipx` on 2024-06-25 19:21:06
 export PATH="$PATH:/home/abhidahal/.local/bin"

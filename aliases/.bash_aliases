@@ -26,12 +26,19 @@ alias lg='lazygit'
 # Uses bat instead of cat for syntax highlighting
 alias cat='bat'
 
+# Uses moar instead of less for syntax highlighting
+alias less='moar'
+
+# zoxide alias
 alias cd='z'
 
+# fastfetch alias
 alias neofetch='fastfetch'
 
+# Generates QR code in terminal
 alias qr='qrencode -t ansiutf8 '
 
+# Opens Neovim with a specific application name and file
 alias svim='NVIM_APPNAME=svim nvim svim'
 
 # Uses GitHub Copilot to explain code
@@ -93,6 +100,9 @@ alias serve="browser-sync start --server --files ."
 # Copies the current directory path to the clipboard
 alias pwdc="pwd | wl-copy"
 
+# Copies the current directory path to the clipboard
+alias pwdc="more"
+
 # Handy change dir shortcuts
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -102,9 +112,12 @@ alias .5='cd ../../../../..'
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 alias ssh='kitten ssh'
-alias zen="/opt/zen-browser"
-alias calc="gnome-calculator --solve"
-alias atac="~/.cargo/bin/atac"
 
-alias kittykeys="fzfHelp $KittyConfig"
-alias hyprkeys="fzfHelp $HyprConfig"
+# Opens Zen browser
+alias zen="/opt/zen-browser"
+
+# Opens Gnome Calculator in solve mode
+alias calc="gnome-calculator --solve"
+
+# Opens ATAC
+alias atac="~/.cargo/bin/atac"
