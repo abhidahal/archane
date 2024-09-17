@@ -16,7 +16,7 @@ _Cyan='\033[0;36m'
 _White='\033[0;37m'
 
 function showAliases() {
-  search_type=("all" "aliases" "functions" "kitty")
+  search_type=("all" "aliases" "functions" "kitty" "hyprland")
   menu=$(printf "%s\n" "${search_type[@]}" | fzf --height=~51% --layout=reverse --border --exit-0)
 
   if [ -z "$menu" ]; then
@@ -56,7 +56,10 @@ function showAliases() {
   }
 ' ~/.config/kitty/kitty.conf
     ;;
-
+  "hyprland")
+    scrPath=$HOME/.local/share/bin # set scripts path
+    "$scrPath"/keybinds_hint.sh
+    ;;
   "all")
     (
       echo -e "\n${_Blue}Functions" &&
@@ -143,12 +146,11 @@ function formated_output() {
       ;;
     "purple")
       color="${_Purple}"
-      symbol=""
+      symbol=" "
       ;;
-
     *)
       color="${_Cyan}"
-      symbol=""
+      symbol=" "
       ;;
     esac
 

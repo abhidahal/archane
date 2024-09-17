@@ -15,9 +15,9 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","hyprland/language","","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","hyprland/window","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","mpris","custom/r_end","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -133,6 +133,12 @@
         }
     },
 
+    "hyprland/language": {
+        "format": "{short} {variant}",
+        "rotate": 0,
+        "on-click": "keyboardswitch.sh",
+    },
+
 	"wlr/taskbar": {
 		"format": "{icon}",
 		"rotate": 0,
@@ -193,6 +199,22 @@
             "(.*)Steam": "Steam 󰓓"
         },
         "max-length": 1000
+    },
+
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "rotate": 0,
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "player-icons": { 
+            "default": "▶",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": ""
+        },
+        // "ignored-players": ["firefox"]
+        "max-length": 1000,
+        "interval": 1
     },
 
     "backlight": {

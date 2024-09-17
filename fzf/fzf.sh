@@ -60,4 +60,5 @@ _fzf_comprun() {
 }
 
 source ~/.config/fzf/fzf-git.sh
+source ~/.config/fzf/fzf-wifi.sh
 export BAT_THEME="Catppuccin Mocha"
