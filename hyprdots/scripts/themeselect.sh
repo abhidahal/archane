@@ -52,8 +52,56 @@ done | rofi -dmenu -theme-str "${r_scale}" -theme-str "${r_override}" -config "$
 
 #// apply theme
 
+ThemeNvimFile="$HOME/.config/nvim/lua/plugins/setTheme.lua"
 if [ ! -z "${rofiSel}" ] ; then
     "${scrDir}/themeswitch.sh" -s "${rofiSel}"
     notify-send -a "t1" -i "$HOME/.config/dunst/icons/hyprdots.png" " ${rofiSel}"
+    echo "Theme: ${rofiSel}"
+    case $rofiSel in
+
+    "Catppuccin Mocha")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-macchiato"/' "$ThemeNvimFile"
+      ;;
+
+    "Catppuccin Latte")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-latte"/' "$ThemeNvimFile"
+      ;;
+
+    "Decay Green")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "decay-dark"/' "$ThemeNvimFile"
+      ;;
+
+    "Rosé Pine")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "rose-pine"/' "$ThemeNvimFile"
+      ;;
+
+    "Tokyo Night")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "tokyonight-storm"/' "$ThemeNvimFile"
+      ;;
+
+    "Material Sakura")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "rose-pine-dawn"/' "$ThemeNvimFile"
+      ;;
+
+    "Graphite Mono")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "kanagawa-dragon"/' "$ThemeNvimFile"
+      ;;
+
+    "Cyberpunk Edge")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "koehler"/' "$ThemeNvimFile"
+      ;;
+
+    "Frosted Glass")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-latte"/' "$ThemeNvimFile"
+      ;;
+
+    "Gruvbox Retro")
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "gruvbox"/' "$ThemeNvimFile"
+      ;;
+
+    *)
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-macchiato"/' "$ThemeNvimFile"
+      ;;
+    esac
 fi
 
