@@ -19,6 +19,7 @@ DIRECTORIES = {
 	"Pdf": [".pdf"],
 	"Programs": [".exe", ".msi"],
     "Json":[".json"],
+    "Keys":[".pem", ".gpg", ".ovpn"],
 }
 
 FILE_FORMATS = {file_format: directory
