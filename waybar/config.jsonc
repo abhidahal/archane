@@ -15,9 +15,9 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","hyprland/language","","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","hyprland/window","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","mpris","custom/r_end","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","mpris","custom/r_end","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","privacy","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -133,12 +133,6 @@
         }
     },
 
-    "hyprland/language": {
-        "format": "{short} {variant}",
-        "rotate": 0,
-        "on-click": "keyboardswitch.sh",
-    },
-
 	"wlr/taskbar": {
 		"format": "{icon}",
 		"rotate": 0,
@@ -152,7 +146,8 @@
 			"Alacritty"
 		],
 		"app_ids-mapping": {
-			"firefoxdeveloperedition": "firefox-developer-edition"
+			"firefoxdeveloperedition": "firefox-developer-edition",
+      "jetbrains-datagrip": "DataGrip"
 		}
 	},
 
@@ -291,6 +286,24 @@
         "on-click": "keybinds_hint.sh"
     },
 
+    "privacy": {
+        "icon-size": 14,
+        "icon-spacing": 5,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+
     "tray": {
         "icon-size": 19,
         "rotate": 0,
@@ -325,12 +338,14 @@
             "music-notification": "󰝚<span foreground='white'><sup></sup></span>",
             "volume-notification": "󰕿<span foreground='white'><sup></sup></span>",
             "notification": "<span foreground='white'><sup></sup></span>",
+            "dnd": "",
             "none": ""
         },
         "return-type": "json",
         "exec-if": "which dunstctl",
         "exec": "notifications.py",
-        "on-click": "sleep 0.1 && dunstctl history-pop",
+        "on-scroll-down": "sleep 0.1 && dunstctl history-pop",
+        "on-click": "dunstctl set-paused toggle",
         "on-click-middle": "dunstctl history-clear",
         "on-click-right": "dunstctl close-all",
         "interval": 1,
