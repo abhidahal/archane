@@ -4,6 +4,8 @@
 
 Welcome to the dotfiles repository for Arch Linux! This curated collection of dotfiles is designed to elevate your Linux experience with the Hyperland theme – a blend of modern aesthetics and functional elegance. Dive into our meticulously crafted configurations to transform your desktop environment into a seamless, immersive workspace.
 
+![image](https://github.com/user-attachments/assets/24f8c191-8c76-45a9-83d3-3171f9bb6297)
+
 ## Featured Configurations
 
 Maximize your productivity with custom aliases, functions, and keybindings for both the terminal and Hyperland, enhancing various tools and settings:
