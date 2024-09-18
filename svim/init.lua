@@ -1,6 +1,0 @@
-require("h3cksamrat.packer")
-require("h3cksamrat.set")
-require("h3cksamrat.lsp")
-require("h3cksamrat.debugger")
-require("h3cksamrat.autocmd")
-require("h3cksamrat.command")
