@@ -30,6 +30,7 @@ cp -r $HOME/work/dot-arch/lazygit $HOME/.config
 ### 5. Remove and link `.zshrc`, `.bashrc`, and `.gitconfig`
 
 ```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm -rf $HOME/.zshrc && rm -rf $HOME/.bashrc
 cp -r $HOME/work/dot-arch/.zshrc $HOME/.config
 cp -r $HOME/work/dot-arch/.bashrc $HOME/.config/
