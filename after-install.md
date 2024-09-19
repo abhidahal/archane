@@ -132,3 +132,13 @@ git config --global user.email "youremail@yourdomain.com"
 ```bash
 sudo npm i -g pnpm && sudo npm i -g yarn && sudo npm i -g @antfu/ni
 ```
+
+### 17. Acer Sense Fan and KB_LIGHTs
+
+```bash
+cp -r $HOME/work/dot-arch/acerSense $HOME/.config
+cd $HOME/.config/acerSense
+sudo pacman -U Predator-Sense-CLI-7.2-11-any.pkg.tar.zst
+chmod +x ./*.sh
+sudo ./install_service.sh
+```
