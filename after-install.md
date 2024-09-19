@@ -11,13 +11,13 @@ yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm ripgrep cheese
 ### 2. Clone Neovim configuration
 
 ```bash
-git clone <https://github.com/abhidahal/avim> $HOME/.config/nvim
+git clone https://github.com/abhidahal/avim $HOME/.config/nvim
 ```
 
 ### 3. Create a `work` directory and clone dotfiles
 
 ```bash
-mkdir $HOME/work && git clone <https://github.com/abhidahal/dot-arch> $HOME/work/
+mkdir $HOME/work && git clone https://github.com/abhidahal/dot-arch $HOME/work/
 ```
 
 ### 4. Copy necessary dotfiles
