@@ -34,6 +34,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 rm -rf $HOME/.zshrc && rm -rf $HOME/.bashrc
 cp -r $HOME/work/dot-arch/.zshrc $HOME/.config
 cp -r $HOME/work/dot-arch/.bashrc $HOME/.config/
+cp -r $HOME/work/dot-arch/aliases $HOME/.config
 cp -r $HOME/work/dot-arch/.gitconfig $HOME/.config/
 ln -s $HOME/.config/.zshrc $HOME/.zshrc
 ln -s $HOME/.config/.bashrc $HOME/.bashrc
