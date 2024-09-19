@@ -5,7 +5,7 @@ The following are commands to install various essential packages, configure Neov
 ### 1. Install necessary packages
 
 ```bash
-yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick
+yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick
 ```
 
 ### 2. Clone Neovim configuration
@@ -77,6 +77,8 @@ sudo pacman -S yazi ffmpegthumbnailer p7zip jq poppler fd ripgrep fzf zoxide ima
 ### 11. Build Bat cache
 
 ```bash
+cp -r $HOME/work/dot-arch/bat $HOME/.config/
+cp -r $HOME/work/dot-arch/fastfetch $HOME/.config/
 bat cache --build
 ```
 
