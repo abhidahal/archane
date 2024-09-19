@@ -1,11 +1,11 @@
 # Installation Commands
 
-The following are commands to install various essential packages, configure Neovim, set up system configurations, and more.
+The following are commands to install various essential  packages, configure Neovim, set up system configurations, and more.
 
 ### 1. Install necessary packages
 
 ```bash
-yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick
+yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm eza ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch openssh pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick
 ```
 
 ### 2. Clone Neovim configuration
@@ -31,6 +31,10 @@ cp -r $HOME/work/dot-arch/lazygit $HOME/.config
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo mv $HOME/.oh-my-zsh /usr/share/oh-my-zsh
+( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
+( cd $ZSH_CUSTOM/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git )
+( cd $ZSH_CUSTOM/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions)     
 rm -rf $HOME/.zshrc && rm -rf $HOME/.bashrc
 cp -r $HOME/work/dot-arch/.zshrc $HOME/.config
 cp -r $HOME/work/dot-arch/.bashrc $HOME/.config/
