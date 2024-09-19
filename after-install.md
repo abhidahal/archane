@@ -43,6 +43,7 @@ ln -s $HOME/.config/.gitconfig $HOME/.gitconfig
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
+cp -r $HOME/work/dot-arch/starship.toml $HOME/.config/
 ```
 
 ### 7. Install Atuin and configure
