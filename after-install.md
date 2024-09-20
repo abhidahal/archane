@@ -1,6 +1,6 @@
 # Installation Commands
 
-The following are commands to install various essential  packages, configure Neovim, set up system configurations, and more.
+The following are commands to install various essential packages, configure Neovim, set up system configurations, and more.
 
 ### 1. Install necessary packages
 
@@ -34,7 +34,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 sudo mv $HOME/.oh-my-zsh /usr/share/oh-my-zsh
 ( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
 ( cd $ZSH_CUSTOM/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git )
-( cd $ZSH_CUSTOM/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions)     
+( cd $ZSH_CUSTOM/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions)
 rm -rf $HOME/.zshrc && rm -rf $HOME/.bashrc
 cp -r $HOME/work/dot-arch/.zshrc $HOME/.config
 cp -r $HOME/work/dot-arch/.bashrc $HOME/.config/
@@ -125,6 +125,9 @@ cat $HOME/.ssh/id_rsa.pub | wl-copy
 
 git config --global user.name "Your Name"
 git config --global user.email "youremail@yourdomain.com"
+
+gh auth login --web -h github.com
+gh extension install github/gh-copilot --force
 ```
 
 ### 16. Install global npm packages
