@@ -8,7 +8,7 @@ source $ZSH/oh-my-zsh.sh
 # In case a command is not found, try to find the package that has it
 function command_not_found_handler {
     # local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
-    formated_output \ "error" "Command not found" 1 \ "info" "zsh : ${1}" 0
+     formated_output \ "error" "Command not found" 1 \ "info" "zsh : ${1}" 0
     # local entries=( ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"} )
     # if (( ${#entries[@]} )) ; then
     #     printf "${bright}$1${reset} may be found in the following packages:\n"

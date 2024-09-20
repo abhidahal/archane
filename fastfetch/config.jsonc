@@ -76,12 +76,6 @@
       "key": "   Font",
       "keyColor": "magenta",
     },
-
-    {
-      "type": "terminalfont",
-      "key": "   Terminal Font",
-      "keyColor": "magenta",
-    },
     {
       "type": "title",
       "key": "  ",

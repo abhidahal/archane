@@ -521,6 +521,11 @@ static struct quirk_entry quirk_acer_predator_pt315_52 = {
 		.cpu_fans = 1,
 		.gpu_fans = 1,
 };
+static struct quirk_entry quirk_acer_predator_pt316_51 = {
+		.turbo = 1,
+		.cpu_fans = 1,
+		.gpu_fans = 1,
+};
 static struct quirk_entry quirk_acer_predator_pt515_51 = {
 		.turbo = 1,
 		.cpu_fans = 1,
@@ -907,6 +912,15 @@ static const struct dmi_system_id acer_quirks[] __initconst = {
 						DMI_MATCH(DMI_PRODUCT_NAME, "Predator PT515-51"),
 				},
 				.driver_data = &quirk_acer_predator_pt515_51,
+		},
+		{
+				.callback = dmi_matched,
+				.ident = "Acer Predator PT316-51",
+				.matches = {
+						DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
+						DMI_MATCH(DMI_PRODUCT_NAME, "Predator PT316-51"),
+				},
+				.driver_data = &quirk_acer_predator_pt316_51,
 		},
 		{
 				.callback = dmi_matched,
@@ -2319,12 +2333,7 @@ static int read_brightness(struct backlight_device *bd)
 
 static int update_bl_status(struct backlight_device *bd)
 {
-	int intensity = bd->props.brightness;
-
-	if (bd->props.power != FB_BLANK_UNBLANK)
-		intensity = 0;
-	if (bd->props.fb_blank != FB_BLANK_UNBLANK)
-		intensity = 0;
+	int intensity = backlight_get_brightness(bd);
 
 	set_u32(intensity, ACER_CAP_BRIGHTNESS);
 
