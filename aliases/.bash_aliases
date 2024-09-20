@@ -87,6 +87,7 @@ alias dolph='dolphin . &'
 
 # Controls RGB lighting on Acer Predator laptops
 alias rgb='~/.config/acerSense/facer_rgb.py'
+alias rgbs='cd ~/.config/acerSense/ && python ~/.config/acerSense/keyboard.py && cd -'
 
 # Organizes the Downloads directory
 alias sortDownloads='cd ~/Downloads/ && python -u ~/.config/hyprdots/scripts/downloadOrganizer.py && cd -'

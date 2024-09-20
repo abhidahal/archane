@@ -375,23 +375,3 @@ function ipaddr() { # Display device and public IP address
   # Display error message if parameters are passed
   echo -e "\e[31mInvalid parameters\n\e[0mno parameters required"
 }
-
-function rgbs() { # Change RGB keyboard light
-  items=("Wave" "Neon" "Static RGB")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Keyboard Light ${FZF_PROMPT_SEPERATOR}" --height=~50% --layout=reverse --border --exit-0)
-
-  case $config in
-  "Wave")
-    rgb -m 3 -s 1 -b 100
-    ;;
-  "Neon")
-    rgb -m 2 -s 1 -b 100
-    ;;
-  "Static RGB")
-    rgb -m 3 -s 0 -b 100
-    ;;
-  *)
-    echo "Nothing selected"
-    ;;
-  esac
-}
