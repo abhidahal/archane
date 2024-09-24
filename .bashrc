@@ -24,3 +24,11 @@ echo "Welcome to the bash shell!"
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 eval "$(atuin init bash --disable-up-arrow)"
+
+# pnpm
+export PNPM_HOME="/home/abhidahal/.local/share/pnpm"
+case ":$PATH:" in
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -70,6 +70,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="moar"
 export MOAR='--style=catppuccin-frappe --statusbar=bold --colors=256 --follow --quit-if-one-screen'
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Created by `pipx` on 2024-06-25 19:21:06
 export PATH="$PATH:/home/abhidahal/.local/bin"
@@ -77,3 +78,11 @@ export PATH="$PATH:/home/abhidahal/.local/bin"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# pnpm
+export PNPM_HOME="/home/abhidahal/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
