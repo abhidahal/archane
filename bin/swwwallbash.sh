@@ -224,6 +224,7 @@ fn_wallbash () {
     [ -z "${appexe}" ] || bash -c "${appexe}"
 }
 
+export -f fn_wallbash
 fn_keyboardColorChange(){
  "${scrDir}"/rgb-keyboard.sh "${dcol_pry4}"
 }

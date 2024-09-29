@@ -56,7 +56,7 @@ ThemeNvimFile="$HOME/.config/nvim/lua/plugins/setTheme.lua"
 if [ ! -z "${rofiSel}" ] ; then
     "${scrDir}/themeswitch.sh" -s "${rofiSel}"
     notify-send -a "t1" -i "$HOME/.config/dunst/icons/hyprdots.png" " ${rofiSel}"
-    echo "Theme: ${rofiSel}"
+
     case $rofiSel in
 
     "Catppuccin Mocha")
