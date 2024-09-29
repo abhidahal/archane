@@ -1,15 +1,16 @@
 vim.g.mapleader = " "
-local keymap = vim.keymap
+local map = LazyVim.safe_keymap_set
 
 -- Quick Exit
-keymap.set("i", "jk", "<ESC>", { desc = "Exit Insert" })
+map("i", "jk", "<ESC>", { desc = "Exit Insert" })
 
-keymap.set("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
-keymap.set("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
+map("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
+map("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 
 -- Select all
 -- keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 -- keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
+
 
 -- Move Lines
 -- keymap.set("n", "<A-down>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -20,8 +21,8 @@ keymap.set("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 -- keymap.set("v", "<A-up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- ScreenShot
-keymap.set("v", "<leader>cp", ":Silicon<return>", { desc = "Screenshot" })
-keymap.set("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
+map("v", "<leader>cp", ":Silicon<return>", { desc = "Screenshot" })
+map("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
 
 -- InsertMode Ctrl Backspace
 -- keymap.set("i", "<C-bs>", "<ESC>ciw", { desc = "Delete" })
