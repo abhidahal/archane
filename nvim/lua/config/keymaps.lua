@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+local Util = require("lazyvim.util")
 local map = LazyVim.safe_keymap_set
 
 -- Quick Exit
@@ -33,3 +34,6 @@ map("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
 -- Keep window centered when going up/down
 -- keymap.set("n", "n", "nzzzv")
 -- keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "<C-/>", function()
+  Util.terminal(nil, { border = "rounded" })
+end, { desc = "Term with border" })

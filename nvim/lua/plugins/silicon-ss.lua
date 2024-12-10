@@ -5,7 +5,7 @@ return {
   config = function()
     require("silicon").setup({
       -- Configuration here, or leave empty to use defaults
-      font = "mononoki Nerd Font",
+      font = "CaskaydiaCove Nerd Font",
       to_clipboard = true,
       theme = "Coldark-Dark",
 

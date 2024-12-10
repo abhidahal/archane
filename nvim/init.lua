@@ -18,11 +18,3 @@ require("telescope").setup({
     -- Your other configurations...
   },
 })
-
-local cmp = require("cmp")
-
-cmp.setup({
-  window = {
-    completion = cmp.config.window.bordered(),
-  },
-})
