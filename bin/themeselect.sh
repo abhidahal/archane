@@ -72,7 +72,7 @@ if [ ! -z "${rofiSel}" ] ; then
       ;;
 
     "Rosé Pine")
-      sed -i 's/colorscheme.=.".*\"/colorscheme = "rose-pine"/' "$ThemeNvimFile"
+      sed -i 's/colorscheme.=.".*\"/colorscheme = "catppuccin-macchiato"/' "$ThemeNvimFile"
       ;;
 
     "Tokyo Night")
