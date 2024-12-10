@@ -101,8 +101,7 @@ alias serve="browser-sync start --server --files ."
 # Copies the current directory path to the clipboard
 alias pwdc="pwd | wl-copy"
 
-# Copies the current directory path to the clipboard
-alias pwdc="more"
+alias lf="${HOME}/.local/share/bin/lf.sh"
 
 # Handy change dir shortcuts
 alias ..='cd ..'
@@ -112,7 +111,7 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
-alias ssh='kitten ssh'
+# alias ssh='kitten ssh'
 
 # Opens Zen browser
 alias zen="/opt/zen-browser"

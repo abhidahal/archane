@@ -15,9 +15,9 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","","","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","","","","custom/l_end","cpu","memory","custom/cpuinfo","custom/gpuinfo","custom/r_end","custom/l_end","idle_inhibitor","clock","custom/r_end","","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","hyprland/window","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","custom/cava","privacy","custom/r_end","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","privacy","custom/r_end","custom/l_end","backlight","network","pulseaudio","pulseaudio#microphone","custom/updates","custom/keybindhint","custom/r_end","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/notifications","custom/power","custom/r_end","custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -133,39 +133,6 @@
         }
     },
 
-	"wlr/taskbar": {
-		"format": "{icon}",
-		"rotate": 0,
-		"icon-size": 21,
-		"icon-theme": "Tela-circle-dracula",
-        "spacing": 0,
-		"tooltip-format": "{title}",
-		"on-click": "activate",
-		"on-click-middle": "close",
-		"ignore-list": [
-			"Alacritty"
-		],
-		"app_ids-mapping": {
-			"firefoxdeveloperedition": "firefox-developer-edition",
-      "jetbrains-datagrip": "DataGrip"
-		}
-	},
-
-    "custom/spotify": {
-        "exec": "mediaplayer.py --player spotify",
-        "format": " {}",
-        "rotate": 0,
-        "return-type": "json",
-        "on-click": "playerctl play-pause --player spotify",
-        "on-click-right": "playerctl next --player spotify",
-        "on-click-middle": "playerctl previous --player spotify",
-        "on-scroll-up": "volumecontrol.sh -p spotify i",
-        "on-scroll-down": "volumecontrol.sh -p spotify d",
-        "max-length": 25,
-        "escape": true,
-        "tooltip": true
-    },
-
     "hyprland/workspaces": {
         "disable-scroll": true,
         "rotate": 0,
@@ -196,10 +163,6 @@
         "max-length": 50
     },
 
-"custom/cava": {
-	"exec": "waybar_cava.sh",
-	"format": "{}"
-},
     "privacy": {
         "icon-size": 16,
         "icon-spacing": 5,

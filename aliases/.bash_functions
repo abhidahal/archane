@@ -171,19 +171,6 @@ function mkcd() { # Create a new directory and change to it
   mkdir -p "$1" && cd "$1" || exit
 }
 
-function lf() { # List files with yazi
-  local tmpfile
-  tmpfile="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmpfile"
-  if [ -n "$tmpfile" ] && [ "$tmpfile" != "$PWD" ]; then
-    pushd -- "$tmpfile" || exit
-    popd || exit
-  fi
-  if [ -f "$tmpfile" ]; then
-    rm -- "$tmpfile"
-  fi
-}
-
 function cdls() { # Change directory and list files
   local DIR="${1:-$HOME}"
 
@@ -310,8 +297,8 @@ function vvv() { # Open any files from root in neovvm
       return
       ;;
     esac
-
   done
+
   if [ $# -eq 0 ]; then
     filepath=$(fd -t f . "${HOME}" | fzf --prompt=" ${FZF_PROMPT_SEPERATOR}" --preview="bat --color=always {}")
   fi
@@ -359,6 +346,80 @@ function qrwifi() { # Generate QR code for conneted wifi
     esac
   done
 
+}
+
+function tnew() {
+  tmux new -s "$(basename "$PWD")"
+}
+
+function tt() {
+  local show_fzf=false
+  local option="Default"
+
+  zl() {
+    local zoxide_dir
+    zoxide_dir=$(zoxide query -l | fzf)
+    if [ -n "$zoxide_dir" ]; then
+      tmux new-session -s "$(basename "$zoxide_dir")" -c "$zoxide_dir"
+    fi
+  }
+
+  display_help() {
+    help_display \ "usage" "[-a] [-l] [-c] [-z] [-f]" \ "-a" "Show tmux session with zoxide list" \ "-l" "List and attach to existing session" \ "-c" "New session in current directory" \ "-z" "List and attach to zoxide directory" \ "-f" "Show fzf menu"
+  }
+
+  while getopts "clzafh" flag; do
+    case "$flag" in
+    a) option="Default" ;;
+    c) option="Current Directory" ;;
+    l) option="Open Session" ;;
+    z) option="Zoxide List" ;;
+    f) show_fzf=true ;;
+    h)
+      display_help
+      return 1
+      ;;
+    *)
+
+      formated_output \ "error" "Invalid options" 1
+      display_help
+      return 1
+      ;;
+    esac
+  done
+
+  if $show_fzf; then
+    local options=("Default" "Open Session" "Current Directory" "Zoxide List")
+    option=$(printf '%s\n' "${options[@]}" | fzf --prompt="Select an option: ")
+  fi
+
+  case $option in
+  "Default")
+    local tmux_sessions
+    local selected_session
+    local zoxide_list
+    local combined_list
+
+    tmux_sessions=$(tmux ls 2>/dev/null | awk -F: '{print "Session : " $1}')
+    zoxide_list=$(zoxide query -l)
+    combined_list=$(printf "%s\n%s" "$tmux_sessions" "$zoxide_list")
+
+    selected_session=$(echo "$combined_list" | fzf)
+    if [ -n "$selected_session" ]; then
+      if [[ "$selected_session" == Session\ :\ * ]]; then
+        tmux attach-session -t "${selected_session#Session : }"
+      else
+        tmux new-session -s "$(basename "$selected_session")" -c "$selected_session"
+      fi
+    fi
+    ;;
+  "Current Directory")
+    tnew
+    ;;
+  "Zoxide List")
+    zl
+    ;;
+  esac
 }
 
 function ipaddr() { # Display device and public IP address
