@@ -1,12 +1,16 @@
 vim.g.mapleader = " "
 local Util = require("lazyvim.util")
 local map = LazyVim.safe_keymap_set
+local opts = { noremap = true, silent = true }
 
 -- Quick Exit
 map("i", "jk", "<ESC>", { desc = "Exit Insert" })
 
 map("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
 map("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
+
+map("n", "<leader>cC", "<cmd>PickColor<cr>", opts)
+map("i", "<C-C>", "<cmd>PickColorInsert<cr>", opts)
 
 -- Select all
 -- keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
