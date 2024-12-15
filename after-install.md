@@ -149,3 +149,10 @@ sudo ./install_service.sh
 ```bash
 curl https://raw.githubusercontent.com/hyprland-community/pyprland/main/scripts/get-pypr | sh
 ```
+
+### 18. Tmux setup
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+tmux source ~/.config/tmux/tmux.conf
+```
