@@ -1,7 +1,6 @@
 vim.g.mapleader = " "
 local Util = require("lazyvim.util")
 local map = LazyVim.safe_keymap_set
-local opts = { noremap = true, silent = true }
 
 -- Quick Exit
 map("i", "jk", "<ESC>", { desc = "Exit Insert" })
@@ -9,12 +8,9 @@ map("i", "jk", "<ESC>", { desc = "Exit Insert" })
 map("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
 map("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 
-map("n", "<leader>cC", "<cmd>PickColor<cr>", opts)
-map("i", "<C-C>", "<cmd>PickColorInsert<cr>", opts)
-
 -- Select all
--- keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
--- keymap.set("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
+map("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
+map("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
 
 
 -- Move Lines
@@ -33,11 +29,8 @@ map("n", "<leader>cp", "V:Silicon<return>", { desc = "Screenshot" })
 -- keymap.set("i", "<C-bs>", "<ESC>ciw", { desc = "Delete" })
 
 -- Paste without overwriting register
--- keymap.set("v", "p", '"_dP')
+map("v", "<leader>p", '"_dP')
 
 -- Keep window centered when going up/down
--- keymap.set("n", "n", "nzzzv")
--- keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<C-/>", function()
-  Util.terminal(nil, { border = "rounded" })
-end, { desc = "Term with border" })
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")

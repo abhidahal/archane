@@ -1,20 +1,9 @@
 return {
-  { "ziontee113/color-picker.nvim", opts = {} },
-  {
-    "f-person/git-blame.nvim",
-    event = "VeryLazy",
-    opts = {
-      enabled = true,
-      message_template = " <summary> • <date> • <author> • <<sha>>",
-      date_format = "%m-%d-%Y %H:%M:%S",
-      virtual_text_column = 1,
-    },
-  },
   { "nvim-lua/plenary.nvim" },
   { "github/copilot.vim" },
   { "fladson/vim-kitty" },
   { "wakatime/vim-wakatime" },
-  { "nvim-treesitter/playground",   cmd = "TSPlaygroundToggle" },
+  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
   {
     "mg979/vim-visual-multi",
     config = function()

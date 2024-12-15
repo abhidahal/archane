@@ -1,1 +1,1 @@
-./facer_rgb.py -m 0 -cR 20 -cB 200 -cG 20 -z 1 ,./facer_rgb.py -m 0 -cR 20 -cB 200 -cG 20 -z 2 ,./facer_rgb.py -m 0 -cR 20 -cB 200 -cG 20 -z 3 ,./facer_rgb.py -m 0 -cR 20 -cB 200 -cG 20 -z 4 
+./facer_rgb.py -m 3 -s 1 -b 100 -d 1 

@@ -4,7 +4,7 @@ require("config.lazy")
 require("telescope").setup({
   defaults = {
     -- Change the prompt prefix
-    prompt_prefix = "󰭎 ",
+    prompt_prefix = " ",
     -- Change the selection caret
     selection_caret = " ",
     -- Change the entry prefix (optional)

@@ -5,7 +5,7 @@ The following are commands to install various essential packages, configure Neov
 ### 1. Install necessary packages
 
 ```bash
-yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm eza ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch openssh pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick
+yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm eza ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch openssh pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick update-grub cmake meson cpio
 ```
 
 ### 2. Clone Neovim configuration

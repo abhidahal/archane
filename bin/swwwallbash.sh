@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-
 #// set variables
 
 export scrDir="$(dirname "$(realpath "$0")")"
@@ -14,7 +13,6 @@ if [ -z "${wallbashImg}" ] || [ ! -f "${wallbashImg}" ] ; then
     echo "Error: Input wallpaper not found!"
     exit 1
 fi
-
 wallbashOut="${dcolDir}/$(set_hash "${wallbashImg}").dcol"
 
 if [ ! -f "${wallbashOut}" ] ; then
@@ -23,6 +21,11 @@ fi
 
 set -a
 source "${wallbashOut}"
+if [ -f "${hydeThemeDir}/theme.dcol" ] && [ "${enableWallDcol}" -eq 0 ]  ; then
+    source "${hydeThemeDir}/theme.dcol"
+    echo "[theme] Overriding dominant colors from \"${hydeTheme}\""
+    echo "[note] Remove \"${hydeThemeDir}/theme.dcol\" to use wallpaper dominant colors"
+fi
 [ "${dcol_mode}" == "dark" ] && dcol_invt="light" || dcol_invt="dark"
 set +a
 
@@ -229,6 +232,7 @@ fn_keyboardColorChange(){
  "${scrDir}"/rgb-keyboard.sh "${dcol_pry4}"
 }
 
+[ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] &&  hyprctl keyword misc:disable_autoreload 1 -q && trap 'hyprctl reload -q && echo "[swwwallbash] reload :: Hyprland"' EXIT
 
 #// switch theme <//> wall based colors
 

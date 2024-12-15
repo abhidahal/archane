@@ -1,8 +1,4 @@
 
-//@theme "/home/abhidahal/.local/share/rofi/themes/launchpad.rasi"
+//@theme "/usr/share/rofi/themes/dmenu.rasi"
 
-//@theme "/home/abhidahal/.config/rofi/themes/style_1.rasi"
-
-//@theme "/home/abhidahal/.local/share/rofi/themes/rounded-nord-dark.rasi"
-
-@theme "/home/abhidahal/.config/rofi/themes/style_1.rasi"
+@theme "/home/abhidahal/.local/share/rofi/themes/rounded-gray-dark.rasi"
