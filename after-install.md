@@ -5,7 +5,7 @@ The following are commands to install various essential packages, configure Neov
 ### 1. Install necessary packages
 
 ```bash
-yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm eza ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract ttf-joypixels tmux fastfetch openssh pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick update-grub cmake meson cpio
+yay -Syu --needed --noconfirm neovim atuin moar zoxide nodejs npm eza ripgrep cheese lazygit fzf microsoft-edge-stable-bin bat lf silicon fd git-delta update-grub tesseract tesseract-data-eng ttf-joypixels tmux fastfetch openssh pipx pyprland cmake github-cli spicetify spicetify-cli spotify openvpn systemd-resolvconf zsh protonvpn nodejs-browser-sync docker docker-desktop zen-browser docker-compose yazi ffmpegthumbnailer p7zip jq poppler imagemagick update-grub cmake meson cpio cava
 ```
 
 ### 2. Clone Neovim configuration
@@ -74,13 +74,7 @@ mkdir $HOME/.config/hyprdots
 cp -r $HOME/.local/share/bin $HOME/.config/hyprdots/scripts
 ```
 
-### 10. Install additional system packages
-
-```bash
-sudo pacman -S yazi ffmpegthumbnailer p7zip jq poppler fd ripgrep fzf zoxide imagemagick
-```
-
-### 11. Build Bat cache
+### 10. Build Bat cache
 
 ```bash
 cp -r $HOME/work/dot-arch/bat $HOME/.config/
@@ -88,7 +82,7 @@ cp -r $HOME/work/dot-arch/fastfetch $HOME/.config/
 bat cache --build
 ```
 
-### 12. Replace SDDM and GRUB themes
+### 11. Replace SDDM and GRUB themes
 
 ```bash
 sudo rm -rf /usr/share/sddm && sudo cp -r $HOME/work/dot-arch/sddm /usr/share
@@ -96,7 +90,7 @@ sudo rm -rf /usr/share/grub && sudo cp -r $HOME/work/dot-arch/grub /usr/share
 sudo update-grub
 ```
 
-### 13. Hyprland Plugin Management
+### 12. Hyprland Plugin Management
 
 ```bash
 hyprpm update
@@ -107,7 +101,7 @@ hyprpm enable hyprexpo
 hyprpm update
 ```
 
-### 14. Clone and set up Rofi themes
+### 13. Clone and set up Rofi themes
 
 ```bash
 git clone https://github.com/lr-tech/rofi-themes-collection.git $HOME/work
@@ -115,13 +109,14 @@ mkdir -p $HOME/.local/share/rofi/themes
 cp -r $HOME/work/rofi-themes-collection/themes/** $HOME/.local/share/rofi/themes
 ```
 
-### 15. Generate SSH keys and add to the agent
+### 14. Generate SSH keys and add to the agent
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "<email>"
 eval "$(ssh-agent -s)"
 ssh-add $HOME/.ssh/id_rsa
 cat $HOME/.ssh/id_rsa.pub | wl-copy
+> chmod 400 ~/.ssh/id_rsa # if needed
 
 git config --global user.name "Your Name"
 git config --global user.email "youremail@yourdomain.com"
@@ -130,20 +125,27 @@ gh auth login --web -h github.com
 gh extension install github/gh-copilot --force
 ```
 
-### 16. Install global npm packages
+### 15. Install global npm packages
 
 ```bash
 sudo npm i -g pnpm && sudo npm i -g yarn && sudo npm i -g @antfu/ni
 ```
 
-### 17. Acer Sense Fan and KB_LIGHTs
+### 16. Acer Sense Fan and KB_LIGHTs
 
 ```bash
 yay -S rsync openrc
 cp -r $HOME/work/dot-arch/acerSense $HOME/.config
 cd $HOME/.config/acerSense
+download from https://github.com/Exodia-OS/exodia-repo/blob/master/x86_64/
 sudo pacman -U Predator-Sense-CLI-7.2-11-any.pkg.tar.zst
 chmod +x ./*.sh
 sudo ./install_service.sh
 > sudo ./install_openrc.sh
+```
+
+### 17. Pyprland setup
+
+```bash
+curl https://raw.githubusercontent.com/hyprland-community/pyprland/main/scripts/get-pypr | sh
 ```
