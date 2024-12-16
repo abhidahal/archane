@@ -52,4 +52,4 @@ decoration {
     }
 }
 
-layerrule = unset,waybar
+# layerrule = unset,waybar

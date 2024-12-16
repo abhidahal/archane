@@ -48,4 +48,4 @@ decoration {
     }
 }
 
-blurls = waybar
+# blurls = waybar
