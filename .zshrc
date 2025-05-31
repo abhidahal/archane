@@ -71,8 +71,8 @@ export VISUAL="nvim"
 export PAGER="moar"
 export MOAR='--style=catppuccin-frappe --statusbar=bold --colors=256 --follow --quit-if-one-screen'
 export XDG_CONFIG_HOME="$HOME/.config"
+export BROWSER="zen-browser"
 
-# Created by `pipx` on 2024-06-25 19:21:06
 export PATH="$PATH:/home/abhidahal/.local/bin"
 
 eval "$(starship init zsh)"
