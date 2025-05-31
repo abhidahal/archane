@@ -229,7 +229,8 @@ fn_wallbash () {
 
 export -f fn_wallbash
 fn_keyboardColorChange(){
- "${scrDir}"/rgb-keyboard.sh "${dcol_pry4}"
+ echo ":: deploying rgb-keyboard colors :: ${1}"
+ "${scrDir}"/rgb-keyboard.sh "${1}"
 }
 
 [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] &&  hyprctl keyword misc:disable_autoreload 1 -q && trap 'hyprctl reload -q && echo "[swwwallbash] reload :: Hyprland"' EXIT
@@ -266,4 +267,4 @@ if [ "${enableWallDcol}" -eq 0 ]; then
 fi
 
 find "${wallbashDir}/Wall-Ways" -type f -name "*.dcol" | parallel fn_wallbash {}
-fn_keyboardColorChange
+fn_keyboardColorChange "${dcol_pry4}"
