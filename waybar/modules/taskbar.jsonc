@@ -8,7 +8,7 @@
 		"on-click": "activate",
 		"on-click-middle": "close",
 		"ignore-list": [
-			"Alacritty"
+			"kitty --class kitty-mainTerm"
 		],
 		"app_ids-mapping": {
 			"firefoxdeveloperedition": "firefox-developer-edition",

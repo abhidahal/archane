@@ -59,6 +59,7 @@ _fzf_comprun() {
   esac
 }
 
-source ~/.config/fzf/fzf-git.sh
-source ~/.config/fzf/fzf-wifi.sh
+[[ ! -f ~/.config/fzf/fzf-git.sh ]] || source ~/.config/fzf/fzf-git.sh 
+[[ ! -f ~/.config/fzf/fzf-wifi.sh ]] || source ~/.config/fzf/fzf-wifi.sh 
+[[ ! -f ~/.config/fzf/fzf-aliases.sh ]] || source ~/.config/fzf/fzf-aliases.sh 
 export BAT_THEME="Catppuccin Mocha"

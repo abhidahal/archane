@@ -35,5 +35,5 @@ return {
         end,
       })
     end,
-  }
+  },
 }

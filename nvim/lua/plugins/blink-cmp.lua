@@ -6,29 +6,30 @@ return {
   opts = {
     keymap = {
       preset = "enter",
-      ['<C-k>'] = { 'select_prev', 'fallback' },
-      ['<C-j>'] = { 'select_next', 'fallback' },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
       ["<C-y>"] = { "select_and_accept" },
-      ["<Tab>"] = {
-        LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
-        "fallback",
-      },
+      -- ["<Tab>"] = {
+      --   LazyVim.cmp.map({ "ai_accept" }),
+      --   "fallback",
+      -- },
     },
     completion = {
       menu = {
-        border = 'rounded',
+        border = "rounded",
       },
+      ghost_text = { enabled = false },
       documentation = {
         auto_show = true,
         window = {
-          border = 'rounded',
+          border = "rounded",
         },
       },
     },
     signature = {
       enabled = true,
       window = {
-        border = 'rounded',
+        border = "rounded",
       },
     },
     appearance = {

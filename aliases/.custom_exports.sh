@@ -5,3 +5,6 @@ export WORK_DIRECTORY="$HOME/work/"
 export CURRENT_WORK_PROJECT="$WORK_DIRECTORY/$CURRENT_WORK_PROJECT_NAME"
 export CONFIG_DIRECTORY="$HOME/.config/"
 export DOWNLOAD_DIRECTORY="$HOME/Downloads/"
+
+# work
+[[ ! -f ~/.config/aliases/evieenv.sh ]] || source ~/.config/aliases/evieenv.sh

@@ -1,21 +1,8 @@
 #!/bin/bash
 
-#Global Variables
-_BROWSER="/opt/zen-browser"
-_ENGINEQUERY="https://www.google.com/search?&q="
+[[ ! -f ~/.config/aliases/helpers.sh ]] || source ~/.config/aliases/helpers.sh
 
-# Color codes
-_ColorOff="\e[0m"
-_Black='\033[0;30m'
-_Red='\033[0;31m'
-_Green='\033[0;32m'
-_Yellow='\033[0;33m'
-_Blue='\033[0;34m'
-_Purple='\033[0;35m'
-_Cyan='\033[0;36m'
-_White='\033[0;37m'
-
-function showAliases() {
+function showAliases() { # Display all aliases
   search_type=("all" "aliases" "functions" "kitty" "hyprland")
   menu=$(printf "%s\n" "${search_type[@]}" | fzf --height=~51% --layout=reverse --border --exit-0)
 
@@ -61,106 +48,10 @@ function showAliases() {
     "$scrPath"/keybinds_hint.sh
     ;;
   "all")
-    (
-      echo -e "\n${_Blue}Functions" &&
-        grep -E "^function " ~/.config/aliases/.bash_functions | sed -E 's/function ([^()]+)\(\) \{ *#(.*)/\1\t\2/;s/function ([^()]+)\(\) \{/\1\tNo comment/'
-
-      echo -e "\n${_ColorOff}${_Cyan}Aliases" &&
-        grep -E '^#|^alias ' ~/.config/aliases/.bash_aliases | sed -n -e '/^#/ {h; d}' -e '/^alias/ {G; s/^alias \([^=]*\)=.*\n# \(.*\)/\1\t\2/;p}'
-
-      echo -e "\n${_Green}Kitty" &&
-        awk '
-        BEGIN { ignore = 0 }
-
-        /^#/ {
-            comment = substr($0, 2)
-            gsub(/^[[:space:]]+/, "", comment)  # Remove leading whitespace from the comment
-            ignore = 1
-            next
-        }
-
-        /^map/ && ignore {
-            split($0, fields, "map ")
-            keybinding = fields[2]
-            split(keybinding, parts, " ")  # Split by space to remove extra middle word
-            keybinding = parts[1]
-            gsub(/^[[:space:]]+/, "", keybinding)
-            print keybinding "\t" comment
-            ignore = 0
-        }
-    ' ~/.config/kitty/kitty.conf
-    ) | moar
+    fzf-aliases-functions
     ;;
 
   esac
-
-}
-
-function help_display() {
-  local flag_message_pairs=("$@")
-  local flag
-  local message
-
-  for ((i = 0; i < ${#flag_message_pairs[@]}; i += 2)); do
-    flag="${flag_message_pairs[i + 1]}"
-    message="${flag_message_pairs[i + 2]}"
-    if [[ "$flag" =~ "usage" ]]; then
-      printf "\n${_Green}Usage: ${_Purple}%s \n" "$message"
-    else
-      printf "\t${_Blue}%s \t${_Cyan}%s\n" "$flag" "$message"
-    fi
-  done
-
-  echo -e "\t ${_Blue}--help | -h  \t${_Cyan}Show this help docs${_ColorOff}"
-}
-
-function formated_output() {
-  local status_message_pairs=("$@")
-  local stat
-  local message
-  local icon
-  local color
-  local symbol
-
-  for ((i = 0; i < ${#status_message_pairs[@]}; i += 2)); do
-    stat=$(echo "${status_message_pairs[i + 1]}" | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g') # Life saver
-    message="${status_message_pairs[i + 2]}"
-    icon="${status_message_pairs[i + 3]}"
-
-    case "$stat" in
-    "error")
-      color="${_Red}"
-      symbol=""
-      ;;
-    "success")
-      color="${_Green}"
-      symbol=""
-      ;;
-    "warning")
-      color="${_Yellow}"
-      symbol=""
-      ;;
-    "info")
-      color="${_Blue}"
-      symbol=""
-      ;;
-    "purple")
-      color="${_Purple}"
-      symbol=" "
-      ;;
-    *)
-      color="${_Cyan}"
-      symbol=" "
-      ;;
-    esac
-
-    if [ "$icon" -eq 1 ]; then
-      printf "%b%s${_ColorOff}" "$color" "$symbol"
-      i=${i+ 1}
-    fi
-    printf " %b%s ${_ColorOff}\n" "$color" "$message"
-
-  done
 }
 
 function mkcd() { # Create a new directory and change to it
@@ -178,14 +69,6 @@ function cdls() { # Change directory and list files
     cd "$DIR" && exa
   else
     formated_output \ "error" "Directory $DIR does not exist." 1
-  fi
-}
-
-function ghp() { # Open zsh git aliases
-  if [ $# -lt 1 ]; then
-    fzf --prompt=" Git Aliases ${FZF_PROMPT_SEPERATOR}" <~/.config/aliases/.gitCommands | awk '{print $1}' | wl-copy
-  else
-    grep "$*" <~/.config/aliases/.gitCommands
   fi
 }
 
@@ -348,11 +231,11 @@ function qrwifi() { # Generate QR code for conneted wifi
 
 }
 
-function tnew() {
+function tnew() { # Create a new tmux session
   tmux new -s "$(basename "$PWD")"
 }
 
-function tt() {
+function tt() { # List and attach to tmux session
   local show_fzf=false
   local option="Default"
 
@@ -404,7 +287,7 @@ function tt() {
     zoxide_list=$(zoxide query -l)
     combined_list=$(printf "%s\n%s" "$tmux_sessions" "$zoxide_list")
 
-    selected_session=$(echo "$combined_list" | fzf)
+    selected_session=$(echo "$combined_list" | fzf --multi)
     if [ -n "$selected_session" ]; then
       if [[ "$selected_session" == Session\ :\ * ]]; then
         tmux attach-session -t "${selected_session#Session : }"
@@ -435,4 +318,36 @@ function ipaddr() { # Display device and public IP address
 
   # Display error message if parameters are passed
   echo -e "\e[31mInvalid parameters\n\e[0mno parameters required"
+}
+
+transfer() {
+  local src_file=""
+  local dest_dir="$HOME/transfer/view"
+  local text_content=""
+  local html_file="$HOME/transfer/view/message.html"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -t)
+      shift
+      text_content="$1"
+      ;;
+    *)
+      src_file="$1"
+      ;;
+    esac
+    shift
+  done
+
+  # Remove all files in ~/transver
+  rm -rf "$dest_dir"*
+
+  # Create destination directory if it doesn't exist
+  mkdir -p "$dest_dir"
+
+  if [[ -n "$text_content" ]]; then
+    echo "<html><body><pre>${text_content}</pre></body></html>" >"$html_file"
+  elif [[ -n "$src_file" ]]; then
+    cp "$src_file" "$dest_dir/"
+  fi
 }

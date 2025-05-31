@@ -37,8 +37,7 @@ pinned = false
 lazy = false
 
 [shortcuts_menu.entries]
-"LocalHost" = 'zen-browser --new-tab "http://localhost:3000" &'
-"Email" = "wl-copy abhidahal7@gmail.com"
+"Email" = "wl-copy <pass>@<pass>.<pass>"
 
 # [shortcuts_menu.entries.Configs]
 "Kitty" = "kitty  nvim ~/.config/kitty/kitty.conf"
@@ -48,15 +47,11 @@ lazy = false
 "Aliases" = "kitty  nvim ~/.config/aliases/.bash_aliases"
 
 [shortcuts_menu.entries."VPN"]
-"Username" = "wl-copy HlCG6h1hfD8XAzPO"
-"Password" = "wl-copy AU0JlbRmgLjQA0BrEoPK2ofvobyZp8f1"
+"Username" = "wl-copy <pass>"
+"Password" = "wl-copy <pass>"
 
-
-[shortcuts_menu.entries.Hydra]
-"code" = 'kitty  nvim ~/work/hydra-den-web/'
-"Web Repo" = 'zen-browser --new-tab "https://github.com/h3cksamrat/hydra-den-web/" &'
-"Admin Repo" = 'zen-browser --new-tab "https://github.com/h3cksamrat/hydra-den-admin-web/" &'
-"Swagger" = 'zen-browser --new-tab "https://roseapi.theasteroid.tech/api-docs" &'
+[shortcuts_menu.entries."NordPass"]
+"Password" = "wl-copy <pass>"
 
 
 [scratchpads.dolphin]

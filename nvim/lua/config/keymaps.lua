@@ -9,9 +9,7 @@ map("n", "<leader>O", "O<ESC>", { desc = "Create new line above" })
 map("n", "<leader>o", "o<ESC>", { desc = "Create new line below" })
 
 -- Select all
-map("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })
 map("i", "<C-a>", "<ESC>gg<S-v>G", { desc = "Select all" })
-
 
 -- Move Lines
 -- keymap.set("n", "<A-down>", "<cmd>m .+1<cr>==", { desc = "Move down" })

@@ -32,6 +32,9 @@ alias less='moar'
 # zoxide alias
 alias cd='z'
 
+# docker alias
+alias dkr='docker'
+
 # fastfetch alias
 alias neofetch='fastfetch'
 
@@ -115,9 +118,6 @@ alias .5='cd ../../../../..'
 
 # Opens Zen browser
 alias zen="/opt/zen-browser"
-
-# Opens Gnome Calculator in solve mode
-alias calc="gnome-calculator --solve"
 
 # Opens ATAC
 alias atac="~/.cargo/bin/atac"
