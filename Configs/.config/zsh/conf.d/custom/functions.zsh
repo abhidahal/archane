@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-[[ ! -f ~/.config/aliases/helpers.sh ]] || source ~/.config/aliases/helpers.sh
-
 function showAliases() { # Display all aliases
   search_type=("all" "aliases" "functions" "kitty" "hyprland")
   menu=$(printf "%s\n" "${search_type[@]}" | fzf --height=~51% --layout=reverse --border --exit-0)
@@ -14,11 +12,11 @@ function showAliases() { # Display all aliases
   case $menu in
   "aliases")
     echo -e "${_Cyan}Aliases \n" &&
-      grep -E '^#|^alias ' ~/.config/aliases/.bash_aliases | sed -n -e '/^#/ {h; d}' -e '/^alias/ {G; s/^alias \([^=]*\)=.*\n# \(.*\)/\1\t\2/;p}'
+      grep -E '^#|^alias ' $HOME/.config/zsh/conf.d/custom/aliases.zsh | sed -n -e '/^#/ {h; d}' -e '/^alias/ {G; s/^alias \([^=]*\)=.*\n# \(.*\)/\1\t\2/;p}'
     ;;
   "functions")
     echo -e "${_Blue}Functions \n" &&
-      grep -E "^function " ~/.config/aliases/.bash_functions | sed -E 's/function ([^()]+)\(\) \{ *#(.*)/\1\t\2/;s/function ([^()]+)\(\) \{/\1\tNo comment/'
+      grep -E "^function " $HOME/.config/zsh/conf.d/custom/functions.zsh | sed -E 's/function ([^()]+)\(\) \{ *#(.*)/\1\t\2/;s/function ([^()]+)\(\) \{/\1\tNo comment/'
     ;;
   "kitty")
     echo -e "\n${_Green}Kitty" &&
@@ -44,7 +42,7 @@ function showAliases() { # Display all aliases
 ' ~/.config/kitty/kitty.conf
     ;;
   "hyprland")
-    scrPath=$HOME/.local/share/bin # set scripts path
+    scrPath=$HOME/.local/lib/hyde/ # set scripts path
     "$scrPath"/keybinds_hint.sh
     ;;
   "all")
@@ -320,7 +318,7 @@ function ipaddr() { # Display device and public IP address
   echo -e "\e[31mInvalid parameters\n\e[0mno parameters required"
 }
 
-transfer() {
+transfer() { # WIP: file sharing server 
   local src_file=""
   local dest_dir="$HOME/transfer/view"
   local text_content=""
@@ -339,10 +337,7 @@ transfer() {
     shift
   done
 
-  # Remove all files in ~/transver
   rm -rf "$dest_dir"*
-
-  # Create destination directory if it doesn't exist
   mkdir -p "$dest_dir"
 
   if [[ -n "$text_content" ]]; then

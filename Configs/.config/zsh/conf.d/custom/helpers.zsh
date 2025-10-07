@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 #Global Variables
-_BROWSER="/opt/zen-browser"
+_BROWSER="app.zen_browser.zen"
 _ENGINEQUERY="https://www.google.com/search?&q="
 
 # Color codes

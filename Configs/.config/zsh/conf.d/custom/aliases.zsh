@@ -73,6 +73,3 @@ alias pwdc="pwd | wl-copy"
 
 # Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 # alias ssh='kitten ssh'
-
-# Opens Zen browser
-alias zen="app.zen_browser.zen"

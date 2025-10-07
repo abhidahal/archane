@@ -332,7 +332,6 @@ fi
 if [ $flg_Install -eq 1 ]; then
   echo ""
   print_log -g "Installation" " :: " "COMPLETED!"
-  wallpaper.sh --set "${scrDir}/initial.jpg" || true
 fi
 
 #------------------------#
