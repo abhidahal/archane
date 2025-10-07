@@ -1,0 +1,116 @@
+# --------------------------------------------------- // System
+uwsm                                                   # A standalone Wayland session manager
+pipewire                                               # audio/video server
+pipewire-alsa                                          # pipewire alsa client
+pipewire-audio                                         # pipewire audio client
+pipewire-jack                                          # pipewire jack client
+pipewire-pulse                                         # pipewire pulseaudio client
+gst-plugin-pipewire                                    # pipewire gstreamer client
+wireplumber                                            # pipewire session manager
+pavucontrol                                            # pulseaudio volume control
+pamixer                                                # pulseaudio cli mixer
+networkmanager                                         # network manager
+network-manager-applet                                 # network manager system tray utility
+bluez                                                  # bluetooth protocol stack
+bluez-utils                                            # bluetooth utility cli
+blueman                                                # bluetooth manager gui
+brightnessctl                                          # screen brightness control
+playerctl                                              # media controls
+udiskie                                                # manage removable media
+
+# --------------------------------------------------- // Display Manager
+# sddm                                                   # display manager for KDE plasma
+qt5-quickcontrols                                      # for sddm theme ui elements
+qt5-quickcontrols2                                     # for sddm theme ui elements
+qt5-graphicaleffects                                   # for sddm theme effects
+
+# --------------------------------------------------- // Window Manager
+hyprland                                               # wlroots-based wayland compositor
+dunst                                                  # notification daemon
+rofi                                                   # application launcher
+waybar                                                 # system bar
+swww                                                   # wallpaper
+hyprlock                                               # lock screen
+wlogout                                                # logout menu
+grim                                                   # screenshot tool
+hyprpicker                                             # color picker
+slurp                                                  # region select for screenshot/screenshare
+satty                                                  # Modern Screenshot Annotation
+cliphist                                               # clipboard manager
+wl-clip-persist                                        # Keep Wayland clipboard even after programs close (avoids crashes)
+hyprsunset                                             # blue light filter
+
+# --------------------------------------------------- // Dependencies
+polkit-gnome                                           # authentication agent
+xdg-desktop-portal-hyprland                            # xdg desktop portal for hyprland
+xdg-desktop-portal-gtk                                 # file picker and dbus  integration
+xdg-user-dirs                                          # Manage user directories like ~/Desktop and ~/Music
+pacman-contrib                                         # for system update check
+parallel                                               # for parallel processing
+jq                                                     # for json processing
+imagemagick                                            # for image processing
+qt5-imageformats                                       # for dolphin image thumbnails
+ffmpegthumbs                                           # for dolphin video thumbnails
+kde-cli-tools                                          # for dolphin file type defaults
+libnotify                                              # for notifications
+noto-fonts-emoji                                       # emoji font
+
+# --------------------------------------------------- // Theming
+nwg-look                                               # gtk configuration tool
+qt5ct                                                  # qt5 configuration tool
+qt6ct                                                  # qt6 configuration tool
+kvantum                                                # svg based qt6 theme engine
+kvantum-qt5                                            # svg based qt5 theme engine
+qt5-wayland                                            # wayland support in qt5
+qt6-wayland                                            # wayland support in qt6
+
+# --------------------------------------------------- // Applications
+firefox                                                # browser
+kitty                                                  # terminal
+dolphin                                                # kde file manager
+ark                                                    # kde file archiver
+unzip                                                  # extracting zip files
+vim                                                    # terminal text editor
+code                                                   # ide text editor
+nwg-displays                                           # monitor management utility
+fzf                                                    # Command-line fuzzy finder
+
+# --------------------------------------------------- // Shell
+starship|zsh                                           # customizable shell prompt written in Rust
+# starship-git                                         # The cross-shell prompt for astronauts  
+starship|fish                                          # customizable shell prompt
+
+fastfetch                                              # system information fetch tool
+
+# --------------------------------------------------- // Archane
+hypridle                                               # idle daemon
+neovim                                                 # highly customizable text editor, Vim fork
+zoxide                                                 # smarter cd command, tracks frequently used directories
+nodejs                                                 # JavaScript runtime for server-side applications
+npm                                                    # package manager for Node.js
+lazygit                                                # terminal UI for Git commands
+bat                                                    # cat clone with syntax highlighting
+eza                                                    # modern ls replacement with enhanced features
+silicon                                                # tool to create code screenshots
+git-delta                                              # syntax-highlighting pager for git and diff output
+update-grub                                            # updates GRUB bootloader configuration
+tesseract                                              # OCR engine for text recognition
+tesseract-data-eng                                     # English language data for Tesseract OCR
+tmux                                                   # terminal multiplexer for session management
+github-cli                                             # command-line interface for GitHub
+nodejs-browser-sync                                    # live-reloading tool for web development
+yazi                                                   # terminal-based file manager
+ffmpeg                                                 # multimedia framework for video/audio processing
+7zip                                                   # file archiver with high compression ratio
+jq                                                     # command-line JSON processor
+poppler                                                # PDF rendering library
+resvg                                                  # SVG rendering library
+imagemagick                                            # image manipulation and conversion tool
+atuin                                                  # shell history search and sync tool
+docker                                                 # containerization platform
+rsync                                                  # file synchronization and transfer tool
+openrc                                                 # dependency-based init system
+duf                                                    # disk usage utility with user-friendly output
+fd                                                     # fast alternative to find command
+less                                                   # terminal pager for viewing text files
+photocrea                                              # photoshop alternative for linux
