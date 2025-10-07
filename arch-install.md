@@ -1,6 +1,6 @@
 # Minimal Installation of Arch Linux
 
-This document outlines the steps for a minimal installation of Arch Linux.
+This document outlines the steps for a minimal installation of Arch Linux or just use `archinstall` command.
 
 ## Live System
 
