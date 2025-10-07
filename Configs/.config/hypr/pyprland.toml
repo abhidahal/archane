@@ -1,0 +1,72 @@
+# Since Pyprland is very configurable, this is just a basic example config
+# to get you started. For more information, see the Pyprland documentation:
+# https://hyprland-community.github.io/pyprland/
+
+
+# Since You are using Hyde, you can use `hyde-shell` to run pypr commands
+# See  'hyde-shell pypr --help' for more information on how to use it!
+
+[pyprland]
+    # pypr has a lot of plugins, but this is just a basic example config
+    # https://hyprland-community.github.io/pyprland/Plugins.html
+    plugins = [ 
+      "scratchpads",
+      "layout_center",
+      "magnify",
+      "expose",
+      "workspaces_follow_focus",
+      "shortcuts_menu",
+ ]
+
+# using variables for demonstration purposes (not needed)
+[pyprland.variables]
+    # term_with_class = "hyde-shell app -T" # You cannot set the class for this
+    # term_with_class = "alacritty --class"
+    # term_with_class = "foot --app-id"
+    term_with_class = "kitty --class"
+
+
+[expose]
+    include_special = false
+
+[scratchpads.dropdownconsole]
+    # This is a drop-down terminal configuration
+    animation = "fromTop"
+    class     = "console-dropdown"
+    command   = "[term_with_class] console-dropdown"
+    max_size  = "90% 100%"
+    size      = "75% 60%"
+    lazy =true
+
+[scratchpads.mainTerm]
+    animation = "fromBottom"
+    class = "mainTerm"
+    command = "[term_with_class] mainTerm"
+    size = "96% 93%"
+    pinned = false
+    lazy = false
+
+[shortcuts_menu.entries]
+    "Email" = "wl-copy <pass>@<pass>.<pass>"
+
+# [shortcuts_menu.entries.Configs]
+    "Kitty" = "kitty  nvim ~/.config/kitty/kitty.conf"
+    "Hypr" = "kitty  nvim ~/.config/hypr/keybindings.conf"
+    "Scripts" = "kitty  nvim ~/.local/lib/hyde"
+    "Nvim" = "kitty  nvim ~/.config/nvim"
+    "Zsh" = "kitty  nvim ~/.config/zsh"
+
+[shortcuts_menu.entries."VPN"]
+    "Username" = "wl-copy <pass>"
+    "Password" = "wl-copy <pass>"
+
+[shortcuts_menu.entries."NordPass"]
+    "Password" = "wl-copy <pass>"
+
+
+[scratchpads.dolphin]
+    animation = "fromRight"
+    command = "dolphin ~/Downloads"
+    class = "dolphin-float"
+    lazy = true
+    size = "40% 90%"

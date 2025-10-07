@@ -1,0 +1,83 @@
+# Maintainer: Your Name <your.email@example.com>
+
+pkgname=acer-predator-turbo-rgb-git
+pkgver=0.20241016
+pkgrel=1
+pkgdesc="Linux kernel module for Acer Predator/Helios/Nitro laptops to control turbo mode and RGB keyboard"
+arch=('x86_64')
+url="https://github.com/JafarAkhondali/acer-predator-turbo-and-rgb-keyboard-linux-module"
+license=('GPL2')
+depends=('linux-headers' 'dkms' 'python' 'rsync')
+makedepends=('git' 'gcc' 'make')
+optdepends=(
+  'linux-lts-headers: For LTS kernel support'
+  'kmod: For module signing with secure boot'
+  'mokutil: For secure boot key management'
+)
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+install="${pkgname}.install"
+source=("git+${url}")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/acer-predator-turbo-and-rgb-keyboard-linux-module"
+  grep "PACKAGE_VERSION" dkms.conf | cut -d'=' -f2 | sed 's/-.*$//'
+}
+
+package() {
+  cd "${srcdir}/acer-predator-turbo-and-rgb-keyboard-linux-module"
+
+  # Create target directory
+  install -dm755 "${pkgdir}/opt/turbo-fan"
+
+  # Copy all files to target directory
+  rsync -av ./* "${pkgdir}/opt/turbo-fan/" --exclude=".git"
+
+  # Create systemd service file
+  install -Dm644 /dev/stdin "${pkgdir}/usr/lib/systemd/system/turbo-fan.service" << EOF
+[Unit]
+Description = Enables turbo button
+After=sysinit.target
+StartLimitIntervalSec=5
+
+[Service]
+Type=simple
+Restart=no
+RemainAfterExit=yes
+User=root
+WorkingDirectory=/opt/turbo-fan
+ExecStart=/bin/bash /opt/turbo-fan/service.sh
+ExecStop=/bin/bash ./uninstall.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  # Create service.sh script
+  install -Dm755 /dev/stdin "${pkgdir}/opt/turbo-fan/service.sh" << EOF
+KERNELVERSION="\$(uname -r)"
+cd /opt/turbo-fan
+
+rm /dev/acer-gkbbl-0 /dev/acer-gkbbl-static-0 -f
+
+if [ "\$(uname -r)" != "\$KERNELVERSION" ] || [ ! -f /opt/turbo-fan/src/facer.ko ]; then
+	make clean
+    source install.sh
+	sed -i "s/^KERNELVERSION.*/KERNELVERSION=\"\$(uname -r)\"/" service.sh
+else
+	rmmod acer_wmi
+	rmmod facer
+	modprobe wmi
+	modprobe sparse-keymap
+	modprobe video
+	insmod src/facer.ko
+fi
+EOF
+
+  # Set appropriate permissions
+  chmod 755 "${pkgdir}/opt/turbo-fan/service.sh"
+
+  # Install facer_rgb.py to /usr/bin/facer_rgb
+  install -Dm755 "${pkgdir}/opt/turbo-fan/facer_rgb.py" "${pkgdir}/usr/bin/facer_rgb"
+}
