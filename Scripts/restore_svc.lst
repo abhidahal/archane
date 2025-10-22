@@ -12,4 +12,5 @@
 
 NetworkManager|root|enable --now
 bluetooth|root|enable --now
+greetd|root|enable 
 # sddm|root|enable

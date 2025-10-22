@@ -1,0 +1,25 @@
+[env]
+ENV_VARIABLE = "value"
+
+[GTK]
+application_prefer_dark_theme = true
+cursor_theme_name = "Wallbash-Gtk"
+cursor_blink = true
+font_name = "Cantarell 16"
+icon_theme_name = "Adwaita"
+theme_name = "wallbash-gtk"
+
+[commands]
+reboot = ["systemctl", "reboot"]
+poweroff = ["systemctl", "poweroff"]
+
+
+[appearance]
+greeting_msg = "Welcome back!"
+
+
+[widget.clock]
+format = "%a %H:%M"
+resolution = "500ms"
+timezone = "Asia/Kathmandu"
+label_width = 250
